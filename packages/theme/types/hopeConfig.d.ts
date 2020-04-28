@@ -7,6 +7,7 @@ import { VuepressConfig, VuepressThemeConfig } from './vuepressConfig';
 import { CommentOptions } from '@mr-hope/vuepress-plugin-comment';
 import { MarkdownEnhanceOption } from 'vuepress-plugin-md-enhance/types';
 import { PWAOptions } from '@mr-hope/vuepress-plugin-pwa';
+import { ShareOption } from '@mr-hope/vuepress-plugin-share';
 
 /** 页脚配置 */
 export type HopeFooterConfig = Partial<{
@@ -98,6 +99,8 @@ export interface HopeThemeConfig extends VuepressThemeConfig {
   encrypt?: EncryptOptions;
   /** 博客设置 */
   blog?: BlogOptions | false;
+  /** 分享设置 */
+  share?: ShareOption | false;
 
   /** 图标前缀 */
   iconPrefix?: string;
@@ -173,12 +176,3 @@ export interface ResolvedHopeVuepressConfig extends HopeVuepressConfig {
   /** 构建头部选项 */
   headOption?: HopeHeadOptionConfig;
 }
-
-/*
- * export interface ColorOption {
- *   '--accent-color'?: string;
- *   '--theme-color'?: Record<string, string>;
- *   light: Record<string, string>;
- *   dark: Record<string, string>;
- * }
- */

@@ -20,6 +20,9 @@ const pluginConfig = (options: ResolvedHopeThemeConfig): PluginConfig[] => {
     /** 全屏插件 */
     ['@mr-hope/components'],
 
+    /** 分享插件 */
+    ['@mr-hope/share', options.share],
+
     /** PWA 插件 */
     ['@mr-hope/pwa', options.pwa],
 
