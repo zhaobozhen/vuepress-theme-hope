@@ -5,7 +5,7 @@ tags:
   - markdown
 ---
 
-# New syntax in Markdown
+# Markdown Enhance
 
 vuepress-theme-hope enables more syntax in Markdown via the built-in [md-enhance](https://vuepress-md-enhance.mrhope.site/) plugin.
 
@@ -25,9 +25,9 @@ You can set `themeconfig.markdown.enableAll` to enable all features of the [md-e
 module.exports = {
   themeConfig: {
     markdown: {
-      enableAll: true
-    }
-  }
+      enableAll: true,
+    },
+  },
 };
 ```
 

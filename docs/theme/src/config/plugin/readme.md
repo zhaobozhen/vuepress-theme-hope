@@ -9,9 +9,9 @@ tags:
 
 # 插件说明
 
-vuepress-theme-hope 启用了很多 vuepress 插件，如果你不需要，可以在 `plugins` 将其禁用。
+vuepress-theme-hope 启用了很多 vuepress 插件，如果你不需要，可以在 themeConfig 中将其禁用。
 
-## 启用的插件
+## 内建插件
 
 - [@mr-hope/vuepress-plugin-comment](https://vuepress-comment.mrhope.site/): 评论与文章信息功能
 
@@ -29,6 +29,10 @@ vuepress-theme-hope 启用了很多 vuepress 插件，如果你不需要，可�
 
 - [vuepress-plugin-md-enhance](https://vuepress-md-enhance.mrhope.site/): 提供更多 Markdown 语法
 
+- [vuepress-plugin-photo-swipe](photo-swipe.md): 使网站的图片支持点击缩放
+
+## 外部插件
+
 - [vuepress-plugin-container](container.md): 自定义容器
 
 - [vuepress-plugin-copyright](copyright.md): 在网站内容被复制的时候提供额外的版权信息
@@ -44,12 +48,6 @@ vuepress-theme-hope 启用了很多 vuepress 插件，如果你不需要，可�
 - @vuepress/plugin-active-header-links: 自动激活侧边栏标题
 
 - @vuepress/plugin-blog: 博客支持
-
-- [**@vuepress/medium-zoom**](medium-zoom.md): 使网站的图片支持点击缩放
-
-  **效果**：
-
-  ![logo](/logo.svg)
 
 - @vuepress/plugin-search: 搜索插件，**将最大搜索建议增加至 10**
 

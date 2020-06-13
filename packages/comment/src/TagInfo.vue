@@ -1,5 +1,5 @@
 <template>
-  <span v-if="$tags.length !== 0">
+  <span v-if="$tags.length !== 0" :title="hint">
     <TagIcon />
     <ul class="tags-wrapper">
       <li
@@ -7,6 +7,7 @@
         :key="tag"
         class="tag"
         :class="{ clickable, [`tag${index % 9}`]: true }"
+        :role="clickable? 'navigation': ''"
         @click="navigate(tag)"
         v-text="tag"
       />
@@ -15,9 +16,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import TagIcon from '@mr-hope/vuepress-shared-utils/icons/TagIcon.vue';
-import { capitalize } from '@mr-hope/vuepress-shared-utils';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import TagIcon from "@mr-hope/vuepress-shared-utils/icons/TagIcon.vue";
+import { capitalize } from "@mr-hope/vuepress-shared-utils";
+import { i18n } from "@mr-hope/vuepress-shared-utils";
 
 @Component({ components: { TagIcon } })
 export default class TagInfo extends Vue {
@@ -29,7 +31,7 @@ export default class TagInfo extends Vue {
 
     const { tag, tags = tag } = this.$frontmatter;
 
-    if (typeof tags === 'string') return [capitalize(tags)];
+    if (typeof tags === "string") return [capitalize(tags)];
 
     if (Array.isArray(tags)) return tags.map((item) => capitalize(item));
 
@@ -44,6 +46,10 @@ export default class TagInfo extends Vue {
     const path = `/tag/${tagName}/`;
     if (this.$route.path !== path) this.$router.push(path);
   }
+
+  private get hint(): string {
+    return (this.$themeLocaleConfig.blog || i18n.getDefaultLocale().blog).tag;
+  }
 }
 </script>
 
@@ -56,16 +62,16 @@ export default class TagInfo extends Vue {
   .tag
     display inline-block
     position relative
-    margin 0 2px
     vertical-align middle
-    font-size 12px
-    border-radius 12px
+    margin 0 0.2em
+    padding 0 0.2em
+    border 0.5px
+    border-style solid
+    border-radius 0.75em
+    background-color #f8f8f8
+    font-size 0.75em
     overflow hidden
     transition all 0.5s
-    padding 1px 4px
-    background-color #f8f8f8
-    border-width 0.5px
-    border-style solid
 
     &.clickable:hover
       cursor pointer

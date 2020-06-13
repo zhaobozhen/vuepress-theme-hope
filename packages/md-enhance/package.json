@@ -1,9 +1,7 @@
 {
   "name": "vuepress-plugin-md-enhance",
-  "version": "0.3.0",
+  "version": "0.6.7",
   "description": "markdown enhancement for vuepress",
-  "main": "src/index.js",
-  "types": "types/index.d.ts",
   "keywords": [
     "vuepress-plugin",
     "markdown",
@@ -11,44 +9,43 @@
     "vuepress-theme-hope",
     "mr-hope"
   ],
-  "scripts": {
-    "test:unit": "vue-cli-service test:unit test/",
-    "test": "mocha -r ts-node/register test/unit/*.ts",
-    "test:serve": "vuepress dev test/demo",
-    "test:clean-serve": "vuepress dev test/demo --no-cache",
-    "test:build": "vuepress build test/demo"
+  "homepage": "https://vuepress-md-enhance.mrhope.site/",
+  "bugs": {
+    "url": "https://github.com/Mister-Hope/vuepress-theme-hope/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mister-Hope/vuepress-theme-hope.git",
     "directory": "packages/md-enhance"
   },
+  "license": "MIT",
   "author": {
-    "email": "zhangbowang1998@gmail.com",
     "name": "Mr.Hope",
+    "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Mister-Hope/vuepress-theme-hope/issues"
+  "main": "src/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "demo:build": "vuepress build test/demo",
+    "demo:clean-serve": "vuepress dev test/demo --no-cache",
+    "demo:serve": "vuepress dev test/demo",
+    "test": "mocha -r ts-node/register test/unit/*.test.ts"
   },
-  "homepage": "https://vuepress-md-enhance.mrhope.site/",
   "dependencies": {
-    "@mr-hope/vuepress-shared-utils": "^0.3.0",
+    "@mr-hope/vuepress-shared-utils": "^0.6.7",
+    "@mr-hope/vuepress-types": "^0.6.7",
     "@types/hash-sum": "^1.0.0",
+    "@types/katex": "0.11.0",
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/markdown-it": "10.0.1",
     "flowchart.js": "^1.13.0",
     "katex": "^0.11.1",
-    "vuepress-plugin-container": "^2.1.3",
-    "vuepress-plugin-typescript": "^0.2.0"
+    "lodash.debounce": "^4.0.8",
+    "vuepress-plugin-container": "^2.1.4",
+    "vuepress-plugin-typescript": "^0.3.0"
   },
   "peerDependencies": {
-    "typescript": "^3.9.2",
-    "vuepress-types": "^0.9.2"
-  },
-  "devDependencies": {
-    "@types/katex": "0.11.0",
-    "@types/markdown-it": "10.0.1",
-    "@vue/cli-plugin-unit-mocha": "4.3.1",
-    "@vue/cli-service": "4.3.1"
+    "typescript": "^3.9.5"
   }
 }

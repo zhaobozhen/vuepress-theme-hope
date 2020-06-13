@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type IAnyObject = Record<string, any>;
 
 /**
@@ -21,23 +22,25 @@ export const deepAssign = <
 
   Object.keys(assignObject).forEach((property) => {
     if (
-      typeof originObject[property] === 'object' &&
+      typeof originObject[property] === "object" &&
       !Array.isArray(originObject[property]) &&
-      typeof assignObject[property] === 'object' &&
+      typeof assignObject[property] === "object" &&
       !Array.isArray(assignObject[property])
     )
       deepAssign(originObject[property], assignObject[property]);
-    else if (typeof assignObject[property] === 'object')
+    else if (typeof assignObject[property] === "object")
       if (Array.isArray(assignObject[property]))
-        (originObject as Record<string, any>)[property] = [
-          ...assignObject[property]
+        (originObject as IAnyObject)[property] = [
+          ...(assignObject[property] as unknown[]),
         ];
       else
-        (originObject as Record<string, any>)[property] = {
-          ...assignObject[property]
+        (originObject as IAnyObject)[property] = {
+          ...(assignObject[property] as Record<string, unknown>),
         };
     else
-      (originObject as Record<string, any>)[property] = assignObject[property];
+      (originObject as IAnyObject)[property] = assignObject[
+        property
+      ] as unknown;
   });
 
   return deepAssign(originObject, ...assignObjects);
@@ -51,7 +54,7 @@ export const deepAssign = <
 export const deepAssignReverse = (
   ...assignObjects: IAnyObject[]
 ): IAnyObject => {
-  if (assignObjects.length === 0) throw new Error('No param is given');
+  if (assignObjects.length === 0) throw new Error("No param is given");
   if (assignObjects.length === 1) return assignObjects[0];
 
   /** 需要合并的对象 */
@@ -61,15 +64,18 @@ export const deepAssignReverse = (
 
   Object.keys(originObject).forEach((property) => {
     if (assignObject[property] === undefined)
-      if (typeof originObject[property] === 'object')
+      if (typeof originObject[property] === "object")
         if (Array.isArray(originObject[property]))
-          assignObject[property] = [...originObject[property]];
-        else assignObject[property] = { ...originObject[property] };
-      else assignObject[property] = originObject[property];
+          assignObject[property] = [...(originObject[property] as unknown[])];
+        else
+          assignObject[property] = {
+            ...(originObject[property] as Record<string, unknown>),
+          };
+      else assignObject[property] = originObject[property] as unknown;
     else if (
-      typeof assignObject[property] === 'object' &&
+      typeof assignObject[property] === "object" &&
       !Array.isArray(assignObject) &&
-      typeof originObject[property] === 'object' &&
+      typeof originObject[property] === "object" &&
       !Array.isArray(originObject[property])
     )
       deepAssignReverse(originObject[property], assignObject[property]);

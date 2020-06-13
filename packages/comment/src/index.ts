@@ -1,25 +1,25 @@
-import { CommentOptions } from '../types';
-import { PluginOptionAPI } from 'vuepress-types';
+import { CommentOptions } from "../types";
+import { PluginOptionAPI } from "@mr-hope/vuepress-types";
 
 export = (options: CommentOptions): PluginOptionAPI => {
   const config: PluginOptionAPI = {
-    name: 'comment',
+    name: "comment",
 
-    define: () =>
-      ({
-        COMMENT_OPTIONS: options
-      } as Record<string, any>),
+    define: () => ({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      COMMENT_OPTIONS: options,
+    }),
 
     plugins: [
       /** Typescript Support */
-      ['@mr-hope/reading-time', { wordPerminute: options.wordPerminute }],
-      ['typescript']
-    ]
+      ["@mr-hope/reading-time", { wordPerminute: options.wordPerminute }],
+      ["typescript"],
+    ],
   };
 
-  if (options.type === 'vssue')
+  if (options.type === "vssue")
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    config.plugins!.push(['@vssue/vuepress-plugin-vssue', options]);
+    config.plugins!.push(["@vssue/vuepress-plugin-vssue", options]);
 
   return config;
 };

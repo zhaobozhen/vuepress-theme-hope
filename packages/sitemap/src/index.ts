@@ -2,20 +2,25 @@ import {
   Context,
   PageComputed,
   PluginOptionAPI,
-  SiteData
-} from 'vuepress-types';
-import { SitemapOptions } from '../types';
-import { SitemapStream } from 'sitemap';
-import chalk from 'chalk';
-import { createWriteStream } from 'fs';
-import { resolve } from 'path';
+  SiteData,
+} from "@mr-hope/vuepress-types";
+import {
+  SitemapFrontmatterOption,
+  SitemapLinkOption,
+  SitemapImageOption,
+  SitemapVideoOption,
+  SitemapOptions,
+} from "../types";
+import { SitemapStream } from "sitemap";
+import chalk from "chalk";
+import { createWriteStream } from "fs";
+import { resolve } from "path";
 
-/** 输出日志 */
 const log = (
   msg: string,
-  color: 'cyan' | 'red' = 'cyan',
-  label = 'SITEMAP'
-): void => console.log(`\n${chalk[color](` ${label} `)} ${msg}`);
+  color: "cyan" | "red" = "cyan",
+  label = "Sitemap"
+): void => console.log(`\n${chalk[color](`${label}: `)}${msg}`);
 
 const stripLocalePrefix = (
   path: string,
@@ -29,23 +34,30 @@ const stripLocalePrefix = (
     .shift() as string;
 
   return {
-    normalizedPath: path.replace(matchingPrefix, '/'),
-    localePrefix: matchingPrefix
+    normalizedPath: path.replace(matchingPrefix, "/"),
+    localePrefix: matchingPrefix,
   };
 };
 
-// eslint-disable-next-line max-lines-per-function
+interface SitemapOption {
+  lastmod: string;
+  changefreq?: string;
+  priority?: number;
+  img?: SitemapImageOption[];
+  video?: SitemapVideoOption[];
+  links?: SitemapLinkOption[];
+}
+
 const generatePageMap = (
   siteData: SiteData,
   base: string,
   options: SitemapOptions
-): Map<string, string[]> => {
+): Map<string, SitemapOption> => {
   const {
-    changefreq = 'daily',
+    changefreq = "daily",
     exclude = [],
     dateFormatter = (page: PageComputed): string =>
-      page.lastUpdatedTime ? new Date(page.lastUpdatedTime).toISOString() : '',
-    ...others
+      page.lastUpdatedTime ? new Date(page.lastUpdatedTime).toISOString() : "",
   } = options;
 
   const { pages, locales = {} } = siteData;
@@ -66,42 +78,41 @@ const generatePageMap = (
     new Map()
   );
 
-  const pagesMap = new Map();
+  const pagesMap = new Map<string, SitemapOption>();
 
   pages.forEach((page) => {
-    const frontmatterOptions = page.frontmatter.sitemap || {};
+    const frontmatterOptions: SitemapFrontmatterOption =
+      (page.frontmatter.sitemap as SitemapFrontmatterOption) || {};
     const metaRobots = (page.frontmatter.meta || []).find(
-      (meta) => meta.name === 'robots'
+      (meta) => meta.name === "robots"
     );
     const excludePage = metaRobots
-      ? (metaRobots.content || '')
+      ? (metaRobots.content || "")
           .split(/,/u)
-          .map((x) => x.trim())
-          .includes('noindex')
+          .map((content) => content.trim())
+          .includes("noindex")
       : frontmatterOptions.exclude;
 
     if (excludePage) exclude.push(page.path);
 
-    // 生成上次的更新时间
     const lastmodifyTime = dateFormatter(page);
-
     const { normalizedPath } = stripLocalePrefix(page.path, localeKeys);
     const relatedLocales =
       localesByNormalizedPagePath.get(normalizedPath) || [];
 
-    let links: { lang: any; url: string }[] = [];
+    let links: SitemapLinkOption[] = [];
 
     if (relatedLocales.length > 1)
       links = relatedLocales.map((localePrefix) => ({
-        lang: locales[localePrefix].lang,
-        url: `${base}${normalizedPath.replace('/', localePrefix)}`
+        lang: locales[localePrefix].lang || "en",
+        url: `${base}${normalizedPath.replace("/", localePrefix)}`,
       }));
 
     pagesMap.set(page.path, {
+      ...frontmatterOptions,
       changefreq: frontmatterOptions.changefreq || changefreq,
-      lastmodISO: lastmodifyTime,
+      lastmod: lastmodifyTime,
       links,
-      ...others
     });
   });
 
@@ -113,19 +124,27 @@ const generateSiteMap = (
   { outDir, themeConfig }: Context,
   options: SitemapOptions
 ): void => {
-  log('Generating sitemap...');
+  log("Generating sitemap...");
 
-  const { urls = [], hostname, xslUrl, exclude = [] } = options;
+  const {
+    urls = [],
+    hostname,
+    outFile = "sitemap.xml",
+    xslUrl,
+    exclude = [],
+    xmlNameSpace: xmlns,
+  } = options;
   const sitemap = new SitemapStream({
     hostname: hostname || themeConfig.hostname,
-    xslUrl
+    xslUrl,
+    xmlns,
   });
-  const sitemapXML = resolve(outDir, options.outFile || 'sitemap.xml');
+  const sitemapXML = resolve(outDir, outFile);
   const writeStream = createWriteStream(sitemapXML);
 
   sitemap.pipe(writeStream);
 
-  const base = siteData.base.replace(/\/$/u, '');
+  const base = siteData.base.replace(/\/$/u, "");
   const pagesMap = generatePageMap(siteData, base, options);
 
   pagesMap.forEach((page, url) => {
@@ -135,21 +154,22 @@ const generateSiteMap = (
 
   urls.forEach((item) => sitemap.write(item));
   sitemap.end();
-  log(`Sitemap generated.`);
+  log("Sitemap generated.");
 };
 
-export = (options: any, context: Context): PluginOptionAPI => ({
-  name: 'sitemap',
+export = (options: SitemapOptions, context: Context): PluginOptionAPI => ({
+  name: "sitemap",
 
   generated(): void {
     const hostname = options.hostname || context.themeConfig.hostname;
+
     if (hostname) generateSiteMap(context.getSiteData(), context, options);
     else
       log(
         'Not generating sitemap because required "hostname" option doesn\'t exist',
-        'red'
+        "red"
       );
   },
 
-  plugins: ['@mr-hope/last-update']
+  plugins: ["@mr-hope/last-update", ["@vuepress/last-updated", false]],
 });

@@ -5,7 +5,7 @@ tags:
   - markdown
 ---
 
-# Markdown 新语法
+# Markdown 增强
 
 vuepress-theme-hope 通过内置 [md-enhance](https://vuepress-md-enhance.mrhope.site/)，在 Markdown 中启用了更多的语法与新功能。
 
@@ -25,9 +25,9 @@ vuepress-theme-hope 通过内置 [md-enhance](https://vuepress-md-enhance.mrhope
 module.exports = {
   themeConfig: {
     markdown: {
-      enableAll: true
-    }
-  }
+      enableAll: true,
+    },
+  },
 };
 ```
 

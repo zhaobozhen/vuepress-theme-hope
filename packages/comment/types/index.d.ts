@@ -1,69 +1,121 @@
-/** 页面信息类型 */
-export type PageInfotype =
-  | 'Author'
-  | 'Time'
-  | 'Category'
-  | 'Tag'
-  | 'ReadTime'
-  | 'Word'
-  | 'Visitor';
+import { Vssue } from "vssue";
 
-/** 评论组件通用选项 */
+/**
+ * 页面信息类型
+ *
+ * Type of page infomation
+ */
+export type PageInfotype =
+  | "Author"
+  | "Time"
+  | "Category"
+  | "Tag"
+  | "ReadTime"
+  | "Word"
+  | "Visitor";
+
 interface BaseCommentOptions {
-  /** 类型，有 `‘valine'` 和 `'vssue` 可选 */
-  type: 'valine' | 'vssue';
-  /** 默认作者 */
+  /**
+   * 评论服务
+   *
+   * Comment Service
+   */
+  type: "valine" | "vssue" | "disable";
+  /**
+   * 默认作者
+   *
+   * Default author
+   */
   author?: string;
-  /** 是否默认启用文章信息 */
+  /**
+   * 文章信息配置
+   *
+   * Page Info display configuration
+   *
+   * @see https://vuepress-comment.mrhope.site/config/#pageinfo (zh)
+   * @see https://vuepress-comment.mrhope.site/en/config/#pageinfo (en)
+   */
   pageInfo?: PageInfotype[] | false;
-  /** 是否默认启用评论 */
+  /**
+   * 是否默认启用评论
+   *
+   * Whether enable comment by default
+   */
   comment?: boolean;
-  /** 每分钟阅读数 */
+  /**
+   * 每分钟阅读字数
+   *
+   * Reading speed of words per minute
+   */
   wordPerminute?: number;
 }
 
-/** Valine 配置 */
-export type ValineOptions = BaseCommentOptions &
-  Partial<{
-    /** appID */
-    appId: string;
+export interface ValineOptions extends BaseCommentOptions {
+  /**
+   * 填入 LeanCloud 中应用的 APP ID
+   *
+   * Fill in the application appId in LeanCloud
+   */
+  appId: string;
 
-    /** appKey */
-    appKey: string;
+  /**
+   * 填入 LeanCloud 中应用的 APP Key
+   *
+   * Fill in the application appKey in LeanCloud
+   */
+  appKey: string;
 
-    /** 是否启用评论 */
-    comment: boolean;
+  /**
+   * 是否启用访问量
+   *
+   * Whether enable page views count by default
+   */
+  visitor?: boolean;
 
-    /** 是否启用访问量 */
-    visitor: boolean;
+  /**
+   * 评论占位符
+   *
+   * Placeholder for comment input
+   */
+  placeholder?: string;
 
-    /** 评论占位符 */
-    placeholder: string;
+  /**
+   * 评论所需信息
+   *
+   * Commenter's info
+   */
+  meta?: string[];
 
-    /** 评论所需信息 */
-    meta: string[];
+  /**
+   * 评论信息必填项配置
+   *
+   * Set required fields for Commenter's info
+   */
+  requiredFields?: string[];
 
-    /** 必填项配置 */
-    requiredFields: string[];
+  /**
+   * 头像类型
+   *
+   * Avator type
+   * @see https://valine.js.org/avatar.html
+   */
+  avatar?: string;
 
-    /** 头像类型 */
-    avatar: string;
+  /** 是否记录 IP */
+  recordIP?: boolean;
 
-    /** 是否记录 IP */
-    recordIP: boolean;
+  /** 每页的最大评论数 */
+  pageSize?: number;
 
-    /** 每页的最大评论数 */
-    pageSize: number;
+  /** 是否启用昵称框自动获取 QQ 昵称和 QQ 头像 */
+  enableQQ?: boolean;
 
-    /** 是否启用昵称框自动获取 QQ 昵称和 QQ 头像 */
-    enableQQ: boolean;
+  /** 自定义表情 CDN */
+  emojiCDN?: string;
 
-    /** 自定义表情 CDN */
-    emojiCDN: string;
-
-    /** 自定义表情包映射 */
-    emojiMaps: Record<string, string>;
-  }>;
+  /** 自定义表情包映射 */
+  emojiMaps?: Record<string, string>;
+}
 
 /** Vssue 配置 */
 export interface VssueOptions extends BaseCommentOptions {
@@ -92,21 +144,16 @@ export interface VssueOptions extends BaseCommentOptions {
   /** 希望使用自己的代理，就需要设置这个选项 */
   proxy?: string | ((url: string) => string);
   /** Vssue 自动创建 Issue 时使用的内容 */
-  issueContent?: (param: any) => string | Promise<string>;
+  issueContent?: (param: {
+    options: Vssue.Options;
+    url: string;
+  }) => string | Promise<string>;
   /** 在对应的 Issue 不存在时，Vssue 会自动尝试为你创建 Issue */
   autoCreateIssue?: false;
 }
 
-/** vuepress-plugin-comment 配置 */
 export type CommentOptions = ValineOptions | VssueOptions;
 
-/** 阅读时间 */
-export interface ReadingTime {
-  minutes: number;
-  words: number;
-}
-
-/** 评论组件全局变量 */
 declare global {
   const COMMENT_OPTIONS: CommentOptions;
 }

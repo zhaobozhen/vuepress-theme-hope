@@ -39,9 +39,9 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import event from './event';
-import { i18n } from '@mr-hope/vuepress-shared-utils';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import event from "./event";
+import { i18n } from "@mr-hope/vuepress-shared-utils";
 
 @Component
 export default class SWUpdatePopup extends Vue {
@@ -56,7 +56,7 @@ export default class SWUpdatePopup extends Vue {
   }
 
   private created() {
-    event.$on('sw-updated', this.onSWUpdated);
+    event.$on("sw-updated", this.onSWUpdated);
   }
 
   private onSWUpdated(updateEvent: any) {
@@ -92,11 +92,11 @@ export default class SWUpdatePopup extends Vue {
   position fixed
   right 1.5em
   bottom 1.5em
-  padding 10px 12px
+  padding 0.6em 0.75em
   display flex
   justify-content center
   align-items center
-  border-radius 6px
+  border-radius 0.4em
   color var(--text-color, $textColor)
   background var(--background-color, #fff)
   border 1px solid var(--grey12, #bbb)
@@ -104,12 +104,12 @@ export default class SWUpdatePopup extends Vue {
   cursor pointer
 
   .text
-    font-size 15px
+    font-size 0.9em
 
   .refresh
-    width 24px
-    height 24px
-    margin-left 6px
+    width 1.5em
+    height 1.5em
+    margin-left 0.4em
     background-color var(--accent-color, $accentColor)
     border-radius 50%
 

@@ -1,6 +1,136 @@
 # Changelog
 
-## [0.3.0](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.3.0-alpha.5...v0.3.0) (2020-05-14)
+## [0.6.7](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.6.6...v0.6.7) (2020-06-12)
+
+### Bug Fixes
+
+- **theme:** fix hightlight line display issue ([fc25fb4](https://github.com/Mister-Hope/vuepress-theme-hope/commit/fc25fb4a26ad4aa3cf683005ff36cb58cfa617e7))
+
+## [0.6.6](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.6.5...v0.6.6) (2020-06-06)
+
+### Bug Fixes
+
+- **theme:** fix anchor ([9777dcf](https://github.com/Mister-Hope/vuepress-theme-hope/commit/9777dcf131c10f11f126878848e196694e3163c8))
+- **theme:** fix got same chunkname with same title ([bd0a18e](https://github.com/Mister-Hope/vuepress-theme-hope/commit/bd0a18e45ba80625d7775dff132ac1e1c0bc3868))
+- **theme:** fix type issue and fix Anchor display issue ([80805c9](https://github.com/Mister-Hope/vuepress-theme-hope/commit/80805c95fccc01bcd2495ae0aef1b0f13b646e16))
+
+### Features
+
+- **comment:** add title ([02909e2](https://github.com/Mister-Hope/vuepress-theme-hope/commit/02909e2576c28149235a728efddb903b90e195d4))
+- **theme:** add default config to change temp folder ([cc650e1](https://github.com/Mister-Hope/vuepress-theme-hope/commit/cc650e1146a0e1914cfea5baf624266a202815ae))
+- **theme:** add one-click-copy plugin ([e5ec9bb](https://github.com/Mister-Hope/vuepress-theme-hope/commit/e5ec9bbc33441f0775584d57bccf7e5160e61288))
+- **theme:** add styl label for stylus blocks ([b1335cf](https://github.com/Mister-Hope/vuepress-theme-hope/commit/b1335cfa9b22ee31217ecaf56464634925f607e7))
+
+## [0.6.5](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.6.4...v0.6.5) (2020-06-03)
+
+### Bug Fixes
+
+- **theme:** fix SidebarLink not display in desktop mode when `sidebar: auto` ([a98bdae](https://github.com/Mister-Hope/vuepress-theme-hope/commit/a98bdaec16ba0b783f1222bff75814134aad17b2)), closes [#227](https://github.com/Mister-Hope/vuepress-theme-hope/issues/227)
+
+### Features
+
+- **theme:** optimize blog page number style ([9fe2c75](https://github.com/Mister-Hope/vuepress-theme-hope/commit/9fe2c75ff6fb427ef342b57431c3cf44e756f9b5))
+- **theme:** optimize the style of dropdown title ([52f5b70](https://github.com/Mister-Hope/vuepress-theme-hope/commit/52f5b708234d46ff191158cb2797f69b292f426c))
+
+## [0.6.4](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.6.3...v0.6.4) (2020-06-02)
+
+### Bug Fixes
+
+- **component:** fix Badge issue with Chinese and fix pagination padding ([bd8adb4](https://github.com/Mister-Hope/vuepress-theme-hope/commit/bd8adb449ea18d8a0d607dcb7dc0599cd7d58ac3))
+
+### Features
+
+- **theme:** improve appearance ([d08df57](https://github.com/Mister-Hope/vuepress-theme-hope/commit/d08df57ce31455552db222b97d353c958a9a47a5))
+
+## [0.6.3](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.6.2...v0.6.3) (2020-05-31)
+
+### Bug Fixes
+
+- **theme:** fix space in page chunk name ([7d3954d](https://github.com/Mister-Hope/vuepress-theme-hope/commit/7d3954d0739569bfa1545db54e2819836a665ced))
+- **theme:** fix style of CategoryList number ([f60e402](https://github.com/Mister-Hope/vuepress-theme-hope/commit/f60e402f476c8f8a954be19b1fe2f0888242b001))
+
+### Features
+
+- **theme:** improve ArticleInfo appearance on mobile ([cd42bfd](https://github.com/Mister-Hope/vuepress-theme-hope/commit/cd42bfd67790cac1acc641de1e6b3bef3c7e755b))
+- **theme:** improve MyTransition animation ([d802813](https://github.com/Mister-Hope/vuepress-theme-hope/commit/d80281309c5c3a3d240bb6ef04c864c619e1e82f))
+- **theme:** locate missing hint is changed to warn and will be popped only once during a run ([0832661](https://github.com/Mister-Hope/vuepress-theme-hope/commit/08326617876f4711473c4061e12eff331349c18d)), closes [#223](https://github.com/Mister-Hope/vuepress-theme-hope/issues/223)
+
+## [0.6.2](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.6.1...v0.6.2) (2020-05-30)
+
+### Bug Fixes
+
+- **theme:** fix eject-hope command ([bbab465](https://github.com/Mister-Hope/vuepress-theme-hope/commit/bbab4653129ea746e3a66de89cebb209e9fe1c1a))
+- **theme:** fix MediaLink display issue and some improvement ([8c08d2c](https://github.com/Mister-Hope/vuepress-theme-hope/commit/8c08d2c508ba3e520a0756b90c21b8084fada357))
+- **theme:** fix navbar active issue and optimize anchor ([e56b839](https://github.com/Mister-Hope/vuepress-theme-hope/commit/e56b839ce41503f089593449f547a382be0a29b7))
+
+### Features
+
+- **theme:** improve inline code in custom blocks ([a87c171](https://github.com/Mister-Hope/vuepress-theme-hope/commit/a87c171e3bcb1af75294ac50cdac81d42fe96a99))
+
+## [0.6.1](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.6.0...v0.6.1) (2020-05-29)
+
+### Bug Fixes
+
+- **theme:** fixing types problems ([b27f091](https://github.com/Mister-Hope/vuepress-theme-hope/commit/b27f0919b5e4bfd1cf6759a89a93c63f68a5276c))
+
+## [0.6.0](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.5.0...v0.6.0) (2020-05-29)
+
+### Bug Fixes
+
+- **md-enhance:** fix flowchart appearance on mobile screen ([520b9e2](https://github.com/Mister-Hope/vuepress-theme-hope/commit/520b9e20755b1ed1f2bdc340e7ac6e6fdd6e4147))
+- **theme:** improve page chunk name and small fix ([196974a](https://github.com/Mister-Hope/vuepress-theme-hope/commit/196974a5353e4a89e8de44690b2cf7fe7a09c704))
+
+### Features
+
+- **theme:** add eject-hope command ([2568734](https://github.com/Mister-Hope/vuepress-theme-hope/commit/256873413694e543efe05facf27e00b22d8da02a))
+- **theme:** add header anchor for desktop (close [#75](https://github.com/Mister-Hope/vuepress-theme-hope/issues/75)) ([97b384c](https://github.com/Mister-Hope/vuepress-theme-hope/commit/97b384c6e4923eaaef02da1cbedd4594f5cdcaf3))
+- **theme:** add medialink in blogpage logo ([7c54fcf](https://github.com/Mister-Hope/vuepress-theme-hope/commit/7c54fcf9d32a38dc29ebc1a985382586afacccb0))
+
+## [0.5.0](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.4.1...v0.5.0) (2020-05-26)
+
+### Bug Fixes
+
+- **theme:** fix sidebar prefix on group ([abccff8](https://github.com/Mister-Hope/vuepress-theme-hope/commit/abccff836afb449182071d2371b433b8884135e6))
+
+### Performance Improvements
+
+- **theme:** improve perf on theme ([93fc490](https://github.com/Mister-Hope/vuepress-theme-hope/commit/93fc4901b325fd7aad01bcfdca0867aca518bdd1))
+
+### BREAKING CHANGES
+
+All the links will end with a splash `/`, instead of `.html`
+
+## [0.4.1](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.4.0...v0.4.1) (2020-05-26)
+
+### Performance Improvements
+
+- **theme:** improve perf when themeConfig.blog is set to `false` ([2befb9a](https://github.com/Mister-Hope/vuepress-theme-hope/commit/2befb9a3f468d2d47553f89964ecf549043e490f))
+
+## [0.4.0](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.3.0...v0.4.0) (2020-05-25)
+
+### Bug Fixes
+
+- **theme:** add transition for ProjectList ([70b968b](https://github.com/Mister-Hope/vuepress-theme-hope/commit/70b968b992881957edee2de19e1043c5fa25c72f))
+
+- **theme:** fix types ([9b0666a](https://github.com/Mister-Hope/vuepress-theme-hope/commit/9b0666ae83cd5d5272097ccbb3094472f06d0831))
+
+- **theme:** fix [@theme](https://github.com/theme) declaration issue ([3c9c27b](https://github.com/Mister-Hope/vuepress-theme-hope/commit/3c9c27b72a9905a2c47b91e1ff4b58f65610ef5e))
+
+- fix mising files ignore by npm ([703f0ae](https://github.com/Mister-Hope/vuepress-theme-hope/commit/703f0ae645bdaadeb0c98aff869472f7c2e6b755))
+
+- **md-enhance:** fix footnote issue ([bbdb6d3](https://github.com/Mister-Hope/vuepress-theme-hope/commit/bbdb6d3616586140d7c6dac50d1aa540ef534ad6))
+
+- **theme:** fix password input issue on mobile screen ([3987001](https://github.com/Mister-Hope/vuepress-theme-hope/commit/3987001273a883ff953f34eb7cfd02da4a02a18b))
+
+### Performance Improvements
+
+- use typescript-eslint V3 and compile more files ([c255473](https://github.com/Mister-Hope/vuepress-theme-hope/commit/c255473e515cda2904e2b16fdb72bdbeebba2b05))
+
+### Features
+
+add a new plugin: vuepress-plugin-photo-swipe ([3c85ba8](https://github.com/Mister-Hope/vuepress-theme-hope/commit/3c85ba86ba401c959e2f91fa924cbae66e8598e2))
+
+## [0.3.0](https://github.com/Mister-Hope/vuepress-theme-hope/compare/v0.2.0...v0.3.0) (2020-05-14)
 
 ### Bug Fixes
 

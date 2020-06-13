@@ -1,8 +1,6 @@
-/* eslint-disable max-lines-per-function */
 /* eslint-disable max-statements */
-
-import MarkdownIt = require('markdown-it');
-import StateInline = require('markdown-it/lib/rules_inline/state_inline');
+import MarkdownIt = require("markdown-it");
+import StateInline = require("markdown-it/lib/rules_inline/state_inline");
 
 // same as UNESCAPE_MD_RE plus a space
 const UNESCAPE_RE = /\\([ \\!"#$%&'()*+,./:;<=>?@[\]^_`{|}~-])/gu;
@@ -38,7 +36,7 @@ const subscript = (state: StateInline, silent?: boolean): boolean => {
   const content = state.src.slice(start + 1, state.pos);
 
   // don't allow unescaped spaces/newlines inside
-  if (content.match(/(^|[^\\])(\\\\)*\s/u)) {
+  if (/(^|[^\\])(\\\\)*\s/u.exec(content)) {
     state.pos = start;
 
     return false;
@@ -49,14 +47,14 @@ const subscript = (state: StateInline, silent?: boolean): boolean => {
   state.pos = start + 1;
 
   // Earlier we checked !silent, but this implementation does not need it
-  token = state.push('sub_open', 'sub', 1);
-  token.markup = '~';
+  token = state.push("sub_open", "sub", 1);
+  token.markup = "~";
 
-  token = state.push('text', '', 0);
-  token.content = content.replace(UNESCAPE_RE, '$1');
+  token = state.push("text", "", 0);
+  token.content = content.replace(UNESCAPE_RE, "$1");
 
-  token = state.push('sub_close', 'sub', -1);
-  token.markup = '~';
+  token = state.push("sub_close", "sub", -1);
+  token.markup = "~";
 
   state.pos = state.posMax + 1;
   state.posMax = max;
@@ -65,7 +63,7 @@ const subscript = (state: StateInline, silent?: boolean): boolean => {
 };
 
 const sub = (md: MarkdownIt): void => {
-  md.inline.ruler.after('emphasis', 'sub', subscript);
+  md.inline.ruler.after("emphasis", "sub", subscript);
 };
 
 export default sub;

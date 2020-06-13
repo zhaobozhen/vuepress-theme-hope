@@ -1,6 +1,6 @@
 <template>
   <div v-if="canFullscreen" class="fullscreen-wrapper">
-    <span class="icon" @click="click">
+    <span class="icon" role="button" @click="click">
       <svg
         :class="isFullscreen? 'cacelFullScreen': 'fullScreen'"
         viewBox="0 0 1024 1024"
@@ -45,8 +45,8 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import screenfull = require('screenfull');
+import { Component, Prop, Vue } from "vue-property-decorator";
+import screenfull = require("screenfull");
 
 @Component
 export default class ScreenFull extends Vue {

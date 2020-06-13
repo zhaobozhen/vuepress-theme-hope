@@ -5,7 +5,7 @@ tags:
   - config
 ---
 
-# @mr-hope/vuepress-plugin-seo
+# @mr-hope/seo
 
 The plugin will inject `<meta>` into your webpage to enhance the SEO of your webpage.
 
@@ -83,7 +83,7 @@ For example:
 
 ```js
 (meta: Meta, info: PageSeoInfo) => {
-  meta.push({ a: '1', b: '2' });
+  meta.push({ a: "1", b: "2" });
 };
 ```
 

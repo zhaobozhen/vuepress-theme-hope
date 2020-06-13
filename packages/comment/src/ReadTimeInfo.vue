@@ -1,14 +1,14 @@
 <template>
-  <span v-if="readtime" class="read-time-info">
+  <span v-if="readtime" class="read-time-info" :title="hint">
     <TimeIcon />
     <span v-text="readtime" />
   </span>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { HopeLangI18nConfig, i18n } from '@mr-hope/vuepress-shared-utils';
-import TimeIcon from '@mr-hope/vuepress-shared-utils/icons/TimeIcon.vue';
+import { Component, Vue } from "vue-property-decorator";
+import { HopeLangI18nConfig, i18n } from "@mr-hope/vuepress-shared-utils";
+import TimeIcon from "@mr-hope/vuepress-shared-utils/icons/TimeIcon.vue";
 
 @Component({ components: { TimeIcon } })
 export default class ReadtimeInfo extends Vue {
@@ -20,9 +20,15 @@ export default class ReadtimeInfo extends Vue {
     return this.$page.readingTime.minutes < 1
       ? readingTime.minute
       : readingTime.time.replace(
-          '$time',
+          "$time",
           Math.round(this.$page.readingTime.minutes).toString()
         );
+  }
+
+  private get hint(): string {
+    return (
+      this.$themeLocaleConfig.blog || i18n.getDefaultLocale().blog
+    ).readingTime;
   }
 }
 </script>

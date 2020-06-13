@@ -5,10 +5,10 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
-import { Route } from 'vue-router';
-import { ValineOptions } from '../types';
-import { i18n } from '@mr-hope/vuepress-shared-utils';
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
+import { ValineOptions } from "../types";
+import { i18n } from "@mr-hope/vuepress-shared-utils";
 
 @Component
 export default class Valine extends Vue {
@@ -38,7 +38,17 @@ export default class Valine extends Vue {
     return (globalEnable && pageEnable !== false) || pageEnable === true;
   }
 
-  @Watch('$route')
+  private mounted() {
+    if (this.valineEnable) {
+      const AV = require("leancloud-storage");
+
+      if (typeof window !== "undefined") (window as any).AV = AV;
+    }
+
+    this.valine(this.$route.path);
+  }
+
+  @Watch("$route")
   onRouteChange(to: Route, from: Route) {
     if (to.path !== from.path)
       // Refresh comment when navigating to a new page
@@ -47,41 +57,31 @@ export default class Valine extends Vue {
       });
   }
 
-  private mounted() {
-    if (this.valineEnable) {
-      const AV = require('leancloud-storage');
-
-      if (typeof window !== 'undefined') (window as any).AV = AV;
-    }
-
-    this.valine(this.$route.path);
-  }
-
   // Init valine
   private valine(path: string) {
     const { valineConfig } = this;
-    const valine = new (require('valine'))();
+    const valine = new (require("valine"))();
 
     valine.init({
-      el: '#valine',
+      el: "#valine",
       appId: valineConfig.appId, // Your appId
       appKey: valineConfig.appKey, // Your appKey
       placeholder:
         valineConfig.placeholder ||
         i18n.getLocale(this.$lang).valineHolder ||
         i18n.getDefaultLocale().valineHolder,
-      meta: valineConfig.meta || ['nick', 'mail', 'link'],
-      requiredFields: valineConfig.requiredFields || ['nick'],
-      avatar: valineConfig.avatar || 'retro',
+      meta: valineConfig.meta || ["nick", "mail", "link"],
+      requiredFields: valineConfig.requiredFields || ["nick"],
+      avatar: valineConfig.avatar || "retro",
       visitor: this.visitorDisplay,
       recordIP: valineConfig.recordIP || false,
       path:
-        path || (typeof window === 'undefined' ? '' : window.location.pathname),
+        path || (typeof window === "undefined" ? "" : window.location.pathname),
       pageSize: valineConfig.pageSize || 10,
       enableQQ: valineConfig.enableQQ || true,
-      emojiCDN: valineConfig.emojiCDN || '',
+      emojiCDN: valineConfig.emojiCDN || "",
       emojiMaps: valineConfig.emojiMaps || null,
-      lang: this.$lang === 'zh-CN' ? 'zh-CN' : 'en'
+      lang: this.$lang === "zh-CN" ? "zh-CN" : "en",
     });
   }
 }
@@ -162,7 +162,7 @@ export default class Valine extends Vue {
         color var(--light-grey, #999)
 
       .vcount
-        font-size 18px
+        font-size 1.2em
 
       .vcards
         .vcard
@@ -195,7 +195,7 @@ export default class Valine extends Vue {
             border-color var(--grey12, #bbb)
 
             .vtime
-              color var(--grey12, #bbb)
+              color var(--light-grey, #999)
 
             .vmeta .vat
               color var(--accent-color, $accentColor)

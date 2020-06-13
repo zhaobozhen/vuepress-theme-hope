@@ -5,7 +5,7 @@ tags:
   - config
 ---
 
-# @mr-hope/vuepress-plugin-seo
+# @mr-hope/seo
 
 这个插件会向你的网页注入 `<meta>`，来增强你网页的 SEO。
 
@@ -87,7 +87,7 @@ interface PageSeoInfo {
 
 ```js
 (meta: Meta, info: PageSeoInfo) => {
-  meta.push({ a: '1', b: '2' });
+  meta.push({ a: "1", b: "2" });
 };
 ```
 

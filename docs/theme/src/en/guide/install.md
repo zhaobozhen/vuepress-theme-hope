@@ -21,7 +21,7 @@ npm i -D vuepress-theme-hope
 
 ```js
 // .vuepress/config.js
-const resolve = require('vuepress-theme-hope/resolve');
+const resolve = require("vuepress-theme-hope/resolve");
 
 module.exports = resolve({
   // your config here
@@ -49,7 +49,7 @@ And create a `tsconfig.json` file in your root directory
     "allowSyntheticDefaultImports": true, // Avoiding some issues related to vuepress-types
     "experimentalDecorators": true, // Typescript files for '.vue' needs this option
     "module": "commonjs", // Avoiding some issues related to vuepress-types
-    "types": ["@mr-hope/vuepress-theme-types", "vuepress-types"]
+    "types": ["@mr-hope/vuepress-theme-types"]
   },
   "include": [
     "src/.vuepress/enhanceApp.ts" // replace `src` with your doc folder

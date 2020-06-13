@@ -1,4 +1,5 @@
-declare module '@vuepress/shared-utils/lib/logger' {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+declare module "@vuepress/shared-utils/lib/logger" {
   interface LoggerOptions {
     logLevel: number;
   }
@@ -36,28 +37,10 @@ declare module '@vuepress/shared-utils/lib/logger' {
   export = logger;
 }
 
-declare module 'docsearch.js/dist/cdn/docsearch.min.js' {
+declare module "docsearch.js/dist/cdn/docsearch.min.js" {
   const docsearch: any;
 
   export default docsearch;
 }
 
-declare module '*.css' {}
-
-declare module '@SearchBox' {
-  import vue from 'vue';
-
-  export default vue;
-}
-
-declare module '@AlgoliaSearchBox' {
-  export default vue;
-}
-
-declare module '@Comment' {
-  export default vue;
-}
-
-declare module '@PageInfo' {
-  export default vue;
-}
+declare module "*.css" {}

@@ -1,6 +1,4 @@
-src/lib/*.ts
-!src/lib/*.d.ts
-src/index.ts
-test/
+*.ts
+!*.d.ts
 
-resolve.ts
+test/

@@ -1,17 +1,16 @@
-/** 阅读时间 */
 export interface ReadingTime {
-  /** 分钟数 */
+  /** expect reading time */
   minutes: number;
-  /** 字数 */
+  /** words of this page */
   words: number;
 }
 
 export interface ReadingTimeOptions {
-  /** 每分钟阅读数 */
+  /** reading speed (words per minute) */
   wordPerminute?: number;
 }
 
-declare module 'vuepress-types/types/page' {
+declare module "@mr-hope/vuepress-types/types/page" {
   interface PageComputed {
     readingTime: ReadingTime;
   }

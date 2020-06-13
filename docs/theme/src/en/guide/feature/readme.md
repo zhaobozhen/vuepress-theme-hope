@@ -22,6 +22,12 @@ tags:
 
 - [**New component**](component.md)
 
+- [**Seo and Sitemap**](seoAndSitemap.md)
+
+- **Image preview support**
+
+  All pictures on the page support click preview, and support zoom, download or share in the preview interface. You can set `themeConfig.photoSwipe` to `false` to disable it.
+
 - **Icon support**
 
   FontClass format icon support has been added in multiple places throughout the theme.
@@ -29,7 +35,7 @@ tags:
   Please import the corresponding icon css file in `index.styl` under `.vuepress/styles`. E.g:
 
   ```css
-  @import '//at.alicdn.com/t/font_1446717_giwlq66d28j.css';
+  @import "//at.alicdn.com/t/font_1446717_giwlq66d28j.css";
   ```
 
   The prefix of the icon is `icon-` by default, which can be changed in the `iconPrefix` field in the theme configuration.

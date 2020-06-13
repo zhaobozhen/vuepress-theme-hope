@@ -1,6 +1,4 @@
-/* eslint-disable spaced-comment */
-
-/// <reference types="vuepress-types" />
+/// <reference types="@mr-hope/vuepress-types" />
 
 /// <reference types="@mr-hope/vuepress-plugin-comment" />
 
@@ -12,7 +10,9 @@
 
 /// <reference types="vuepress-plugin-md-enhance" />
 
+/// <reference types="vuepress-plugin-photo-swipe" />
+
 /// <reference types="vuepress-theme-hope" />
 
-import './shims-vue';
-import './declare';
+import "./shims-vue";
+import "./declare";

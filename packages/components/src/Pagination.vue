@@ -1,45 +1,49 @@
 <template>
-  <div v-if="enable" class="pagation-wrapper">
-    <div class="pagation-list">
+  <div v-if="enable" class="pagination-wrapper">
+    <div class="pagination-list">
       <div class="btn-group">
         <div
           v-if="currentPage > 1"
           class="btn"
+          role="navigation"
           unselectable="on"
           @click="navigate(currentPage - 1)"
         >{{i18n.prev}}</div>
-        <div v-if="displayLeftEllipsis" @click="navigate(1)">1</div>
+        <div v-if="displayLeftEllipsis" role="navigation" @click="navigate(1)">1</div>
         <div v-if="displayLeftEllipsis" class="ellipsis">...</div>
         <div
           v-for="num in indexs"
           :key="num"
           :class="{ active: currentPage === num }"
+          role="navigation"
           @click="navigate(num)"
         >{{num}}</div>
         <div v-if="displayRightEllipsis && currentPage < totalPages - 3" class="ellipsis">...</div>
         <div
           v-if="displayRightEllipsis && currentPage < totalPages - 3"
+          role="navigation"
           @click="navigate(totalPages)"
         >{{totalPages}}</div>
         <div
           v-if="currentPage < totalPages"
           class="btn"
+          role="navigation"
           @click="navigate(currentPage + 1)"
         >{{i18n.next}}</div>
       </div>
       <div class="navigate-wrapper">
         <div class="text">{{i18n.navigate}}:&nbsp;</div>
         <input v-model="input" type="text" @keypress.enter="jumpPage(input)" />
-        <div class="navigate-button" @click="jumpPage(input)">{{i18n.button}}</div>
+        <div class="navigate-button" role="navigation" @click="jumpPage(input)">{{i18n.button}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang='ts'>
-import { Component, Model, Prop, Vue } from 'vue-property-decorator';
-import { Route } from 'vue-router';
-import { i18n } from '@mr-hope/vuepress-shared-utils';
+import { Component, Model, Prop, Vue } from "vue-property-decorator";
+import { Route } from "vue-router";
+import { i18n } from "@mr-hope/vuepress-shared-utils";
 
 @Component
 export default class Pagination extends Vue {
@@ -51,10 +55,10 @@ export default class Pagination extends Vue {
   /** Items per page */
   private readonly perPage!: number;
 
-  @Model('change', { type: Number })
+  @Model("change", { type: Number })
   private readonly currentPage!: number;
 
-  private input = '';
+  private input = "";
 
   private get totalPages() {
     return Math.ceil(this.total / this.perPage);
@@ -117,7 +121,7 @@ export default class Pagination extends Vue {
   private navigate(index: number) {
     const path = `${this.$route.path}?index=${index}`;
 
-    this.$emit('change', index);
+    this.$emit("change", index);
     if (this.$route.fullPath !== path) this.$router.push(path);
   }
 
@@ -127,8 +131,8 @@ export default class Pagination extends Vue {
 
     if (pageNum <= this.totalPages && pageNum > 0) this.navigate(pageNum);
     else {
-      const errorText = this.i18n.errorText.split('$page');
-      // eslint-disable-next-line no-alert
+      const errorText = this.i18n.errorText.split("$page");
+
       alert(`${errorText[0]}${this.totalPages}${errorText[1]}`);
     }
   }
@@ -136,14 +140,11 @@ export default class Pagination extends Vue {
 </script>
 
 <style lang="stylus">
-.pagation-wrapper
+.pagination-wrapper
   font-weight 600
-  margin 20px auto 12px
+  margin 1.25rem -0.5rem 0.75rem
 
-  @media (max-width: $MQMobileNarrow)
-    margin 20px -1.5rem 12px
-
-  .pagation-list
+  .pagination-list
     display flex
     justify-content space-evenly
     align-items center
@@ -154,14 +155,14 @@ export default class Pagination extends Vue {
     .btn-group
       display flex
       align-items stretch
-      margin 0 8px
+      margin 0 0.5em
       border 1px solid var(--border-color, $borderColor)
-      border-radius 4px
+      border-radius 0.25em
       overflow hidden
 
       div
         position relative
-        padding 5px 8px
+        padding 5px 0.5em
         font-size 14px
         color var(--accent-color, $accentColor)
         cursor pointer
@@ -197,17 +198,17 @@ export default class Pagination extends Vue {
       display flex
       justify-content center
       align-items center
-      margin 0 8px
+      margin 0 0.5em
 
       div.text
         font-size 14px
 
       input
-        width 55px
-        height 24px
+        width 3.5em
+        height 1.5em
         font-size 13px
         border 1px solid var(--border-color, $borderColor)
-        border-radius 4px
+        border-radius 0.25em
         outline none
         text-align center
         margin 6px 0
@@ -217,9 +218,9 @@ export default class Pagination extends Vue {
       .navigate-button
         font-size 14px
         margin-left 5px
-        padding 4px 8px
+        padding 0.25em 0.5em
         border 1px solid var(--border-color, $borderColor)
-        border-radius 4px
+        border-radius 0.25em
         overflow hidden
         cursor pointer
 

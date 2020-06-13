@@ -9,9 +9,9 @@ tags:
 
 # Plugin Description
 
-vuepress-theme-hope has many vuepress plugins enabled. If you don't need them, you can disable them in plugins.
+vuepress-theme-hope has many vuepress plugins enabled. If you don't need them, you can disable them in themeConfig.
 
-## plugins enabled
+## Plugins build-in
 
 - [@mr-hope/vuepress-plugin-comment](https://vuepress-comment.mrhope.site/en/): Comment and page info feature
 
@@ -29,6 +29,10 @@ vuepress-theme-hope has many vuepress plugins enabled. If you don't need them, y
 
 - [vuepress-plugin-md-enhance](https://vuepress-md-enhance.mrhope.site/): Provide more Markdown syntax
 
+- [vuepress-plugin-photo-swipe](photo-swipe.md): Make the site's picture support click zoom
+
+## Other related plugins
+
 - [vuepress-plugin-container](container.md): custom container
 
 - [vuepress-plugin-copyright](copyright.md): Provide additional copyright information when the content of the website is copied
@@ -44,12 +48,6 @@ vuepress-theme-hope has many vuepress plugins enabled. If you don't need them, y
 - @vuepress/plugin-active-header-links: automatically activate sidebar headers
 
 - @vuepress/plugin-blog: Blog support
-
-- [**@vuepress/medium-zoom**](medium-zoom.md): make the website's images zoom when being clicked
-
-  **effect**:
-
-  ![logo](/logo.svg)
 
 - @vuepress/plugin-search: search for plugins, **increase maximum search suggestions to 10**
 

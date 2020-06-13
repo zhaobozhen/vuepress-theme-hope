@@ -10,7 +10,7 @@ tags:
 
 ## 深色模式
 
-在深色模式下，页面会使用深色背景以保护您的眼睛。
+在深色模式下，页面会使用深色背景以保护你的眼睛。
 
 ![深色模式](./assets/darkmode.png)
 
@@ -40,12 +40,12 @@ tags:
 module.exports = {
   themeConfig: {
     themeColor: {
-      blue: '#2196f3',
-      red: '#f26d6d',
-      green: '#3eaf7c',
-      orange: '#fb9b5f'
-    }
-  }
+      blue: "#2196f3",
+      red: "#f26d6d",
+      green: "#3eaf7c",
+      orange: "#fb9b5f",
+    },
+  },
 };
 ```
 
@@ -79,7 +79,7 @@ $colorPicker = {
 // .vuepress/config.js
 module.exports = {
   themeConfig: {
-    fullscreen: false // 默认启用，设置 false 将其关闭
-  }
+    fullscreen: false, // 默认启用，设置 false 将其关闭
+  },
 };
 ```

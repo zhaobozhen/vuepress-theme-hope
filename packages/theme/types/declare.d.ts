@@ -1,25 +1,33 @@
-import { LocaleConfig, ThemeConfig } from 'vuepress-types/types/config';
-import { PageComputed, PageFrontmatter } from 'vuepress-types/types/page';
-import { SiteData } from 'vuepress-types/types/context';
+declare module "@SearchBox" {
+  import vue from "vue";
 
-declare module 'vue/types/vue' {
-  export interface Vue {
-    $category: any;
-    $tag: any;
-    $currentTag: any;
-    $currentCategory: any;
-    $pagination: any;
+  export default vue;
+}
 
-    $description: string;
-    $frontmatter: PageFrontmatter;
-    $lang: string;
-    $localeConfig: LocaleConfig;
-    $localePath: string;
-    $page: PageComputed;
-    $site: SiteData;
-    $siteTitle: string;
-    $themeConfig: ThemeConfig;
-    $themeLocaleConfig: LocaleConfig;
-    $title: string;
-  }
+declare module "@AlgoliaSearchBox" {
+  export default vue;
+}
+
+declare module "@BlogInfo" {
+  export default vue;
+}
+
+declare module "@BlogPage" {
+  export default vue;
+}
+
+declare module "@Comment" {
+  export default vue;
+}
+
+declare module "@PageInfo" {
+  export default vue;
+}
+
+declare module "@Pagination" {
+  export default vue;
+}
+
+declare module "@ThemeColor" {
+  export default vue;
 }

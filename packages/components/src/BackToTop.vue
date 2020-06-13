@@ -3,6 +3,7 @@
     <svg
       v-if="isDisplay"
       class="back-to-top"
+      role="button"
       viewBox="0 0 1024 1024"
       xmlns="http://www.w3.org/2000/svg"
       @click="scrollToTop"
@@ -22,8 +23,8 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { debounce } from 'lodash';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import debounce = require("lodash.debounce");
 
 @Component
 export default class BackToTop extends Vue {
@@ -34,7 +35,7 @@ export default class BackToTop extends Vue {
   private scrollTop = 0;
 
   private get thresholdDistance() {
-    return typeof this.$themeConfig.backtotop === 'number'
+    return typeof this.$themeConfig.backtotop === "number"
       ? this.$themeConfig.backtotop
       : this.threshold;
   }
@@ -53,7 +54,7 @@ export default class BackToTop extends Vue {
   private mounted() {
     this.scrollTop = this.getScrollTop();
     window.addEventListener(
-      'scroll',
+      "scroll",
       debounce(() => {
         this.scrollTop = this.getScrollTop();
       }, 100)
@@ -72,7 +73,7 @@ export default class BackToTop extends Vue {
 
   // Scroll to top
   private scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     this.scrollTop = 0;
   }
 }

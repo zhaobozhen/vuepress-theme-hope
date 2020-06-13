@@ -1,16 +1,8 @@
 export default class SWUpdateEvent {
-  registration: any;
-
-  constructor(registration: any) {
-    Object.defineProperty(this, 'registration', {
-      value: registration,
-      configurable: true,
-      writable: true
-    });
-  }
+  constructor(private registration: ServiceWorkerRegistration) {}
 
   /** Check if the new service worker exists or not. */
-  update(): void {
+  update(): Promise<void> {
     return this.registration.update();
   }
 
@@ -22,18 +14,19 @@ export default class SWUpdateEvent {
 
     if (!worker) return Promise.resolve();
 
-    console.log('[PWA]: 执行 worker.skipWaiting().');
+    console.log("[PWA]: 执行 worker.skipWaiting().");
 
     return new Promise((resolve, reject) => {
       const channel = new MessageChannel();
 
       channel.port1.onmessage = (event): void => {
-        console.log('[PWA]: 完成 worker.skipWaiting().');
-        if (event.data.error) reject(event.data.error);
+        console.log("[PWA]: 完成 worker.skipWaiting().");
+        if ((event.data as { error: Error | null }).error)
+          reject((event.data as { error: Error | null }).error);
         else resolve(event.data);
       };
 
-      worker.postMessage({ type: 'skip-waiting' }, [channel.port2]);
+      worker.postMessage({ type: "skip-waiting" }, [channel.port2]);
     });
   }
 }

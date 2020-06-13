@@ -10,12 +10,16 @@ export const changeClass = (
   insert: string[],
   remove: string[]
 ): void => {
+  const oldClasses: string[] = [];
+
   domClass.remove(...remove);
-  const oldClasses = [...(domClass as any)];
-  domClass.value = '';
+  domClass.forEach((classname) => {
+    oldClasses.push(classname);
+  });
+  domClass.value = "";
   domClass.add(...insert, ...oldClasses);
 };
 
 export default {
-  changeClass
+  changeClass,
 };

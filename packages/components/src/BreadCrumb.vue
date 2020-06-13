@@ -18,23 +18,18 @@
 </template>
 
 <script lang='ts'>
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
-import { Route } from 'vue-router';
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
 
-/** 路径导航配置 */
 interface BreadCrumbConfig {
-  /** 标题 */
   title: string;
-  /** 图标 */
   icon?: string;
-  /** 地址 */
   url: string;
 }
 
 @Component
 export default class BreadCrumb extends Vue {
-  /** 是否启用路径导航 */
-  private get enable() {
+  private get enable(): boolean {
     const globalEnable = this.$themeConfig.breadcrumb !== false;
     const pageEnable = this.$page.frontmatter.breadcrumb;
 
@@ -44,8 +39,7 @@ export default class BreadCrumb extends Vue {
     );
   }
 
-  /** 是否启用路径导航图标 */
-  private get iconEnable() {
+  private get iconEnable(): boolean {
     const globalEnable = this.$themeConfig.breadcrumbIcon !== false;
     const pageEnable = this.$page.frontmatter.breadcrumbIcon;
 
@@ -55,23 +49,18 @@ export default class BreadCrumb extends Vue {
     );
   }
 
-  /** 图标前缀 */
-  private get iconPrefix() {
+  private get iconPrefix(): string {
     const { iconPrefix } = this.$themeConfig;
 
-    return iconPrefix === '' ? '' : iconPrefix || 'icon-';
+    return iconPrefix === "" ? "" : iconPrefix || "icon-";
   }
 
-  /** 路径导航配置 */
   private get config(): BreadCrumbConfig[] {
-    /** 路径导航配置 */
     const breadcrumbConfig: BreadCrumbConfig[] = [];
-    /** 页面对象 */
     const { pages } = this.$site;
-    /** 页面路径 */
     const links = this.getLinks(this.$route);
 
-    // 生成路径导航配置
+    // generate breadcrumb config
     for (let index = 1; index < links.length; index++)
       for (let index2 = 0; index2 < pages.length; index2++) {
         const element = pages[index2];
@@ -80,7 +69,7 @@ export default class BreadCrumb extends Vue {
           breadcrumbConfig.push({
             title: element.title,
             icon: element.frontmatter.icon,
-            url: element.path
+            url: element.path,
           });
           break;
         }
@@ -89,20 +78,17 @@ export default class BreadCrumb extends Vue {
     return breadcrumbConfig;
   }
 
-  /** 生成页面路径链接 */
   private getLinks(route: Route) {
-    /** 路径项 */
-    const routePaths = route.fullPath.split('#')[0].split('/');
-    /** 链接 */
+    const routePaths = route.fullPath.split("#")[0].split("/");
     const links: string[] = [];
-    let link = '';
+    let link = "";
 
-    // 生成链接
+    // generate links
     routePaths.forEach((element, index) => {
       if (index !== routePaths.length - 1) {
         link += `${element}/`;
         links.push(link);
-      } else if (element !== '') {
+      } else if (element !== "") {
         link += element;
         links.push(link);
       }
@@ -116,7 +102,7 @@ export default class BreadCrumb extends Vue {
 <style lang="stylus">
 @require '~@mr-hope/vuepress-shared-utils/styles/wrapper.styl'
 
-// 修正标题的上边距
+// Fix top boarder of heading1
 .theme-default-content:not(.custom)
   > *:first-child
     margin-top 0
@@ -126,7 +112,6 @@ h1, h2, h3, h4, h5, h6
     margin-top 0.5rem - $navbarHeight !important
     padding-top $navbarHeight + 1rem !important
 
-// 路径导航样式
 .breadcrumb
   @extend $wrapper
   position relative
@@ -138,6 +123,16 @@ h1, h2, h3, h4, h5, h6
   margin-bottom - $navbarHeight
   padding-bottom 0.2rem
 
+  @media (max-width: $MQNarrow)
+    font-size 14px
+
+  @media (max-width: $MQMobileNarrow)
+    font-size 12.8px
+
+  // breadcrumb is disabled
+  &.disable
+    padding-bottom 1.3em
+
   .iconfont
     font-size inherit
 
@@ -145,15 +140,6 @@ h1, h2, h3, h4, h5, h6
       line-height 1
       vertical-align middle
       display inline-block
-
-  @media (max-width: $MQNarrow)
-    font-size 14px
-
-  @media (max-width: $MQMobileNarrow)
-    font-size 12.8px
-
-  &.disable
-    padding-bottom 1.3em
 
   ul
     list-style none
