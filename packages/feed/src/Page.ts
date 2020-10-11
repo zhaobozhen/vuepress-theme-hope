@@ -1,6 +1,11 @@
-import { Context, Page, PageComputed, PageFrontmatter } from 'vuepress-types';
-import { isUrl, resolveUrl } from './util';
-import { FeedOptions } from '../types';
+import {
+  Context,
+  Page,
+  PageComputed,
+  PageFrontmatter,
+} from "@mr-hope/vuepress-types";
+import { isUrl, resolveUrl } from "./util";
+import { FeedOptions } from "../types";
 
 class FeedPage {
   private frontmatter: PageFrontmatter;
@@ -16,7 +21,7 @@ class FeedPage {
     this.feedOption = this.frontmatter.feed || {};
   }
 
-  private get page(): Page {
+  private get page(): Page | undefined {
     return this.context.pages.find((page) => page.key === this.$page.key);
   }
 
@@ -26,10 +31,11 @@ class FeedPage {
   }
 
   public get title(): string {
-    return this.feedOption.title || this.$page.title;
+    return (this.feedOption.title as string) || this.$page.title;
   }
 
   public get date(): Date {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { date, time = date } = this.$page.frontmatter;
 
     return time && time instanceof Date
@@ -41,9 +47,9 @@ class FeedPage {
     if (this.frontmatter.description) return this.frontmatter.description;
 
     if (this.$page.excerpt)
-      return this.context.markdown.render(this.$page.excerpt).html || '';
+      return this.context.markdown.render(this.$page.excerpt).html || "";
 
-    return '';
+    return "";
   }
 
   public get content(): string {
@@ -52,7 +58,7 @@ class FeedPage {
     // eslint-disable-next-line no-underscore-dangle
     const { html } = this.context.markdown.render(this.page._strippedContent);
 
-    return html || '';
+    return html || "";
   }
 
   public get image(): string {
@@ -66,7 +72,7 @@ class FeedPage {
   public get author(): string {
     const { author } = this.$page.frontmatter;
     const { author: globalAuthor } = this.context.themeConfig;
-    return author === false ? '' : author || globalAuthor;
+    return author === false ? "" : author || globalAuthor;
   }
 
   public get contributor(): any[] {
@@ -88,7 +94,7 @@ class FeedPage {
       id: url, // @notes: i considered using key, but url is more relevant
       link: url,
       date: this.date,
-      image: this.image
+      image: this.image,
 
       /*
        * @todo:
@@ -106,7 +112,7 @@ class FeedPage {
        */
     };
 
-    const keys = ['author', 'contributor'];
+    const keys = ["author", "contributor"];
 
     for (const key of keys) {
       const res = this[key];
