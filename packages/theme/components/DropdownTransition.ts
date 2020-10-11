@@ -1,13 +1,18 @@
-import { Component, Vue } from "vue-property-decorator";
+import { defineComponent } from "@vue/composition-api";
 
-@Component
-export default class DropdownTransition extends Vue {
-  private setHeight(items: HTMLElement): void {
-    // explicitly set height so that it can be transitioned
-    items.style.height = `${items.scrollHeight}px`;
-  }
+export default defineComponent({
+  name: "DropdownTransition",
 
-  private unsetHeight(items: HTMLElement): void {
-    items.style.height = "";
-  }
-}
+  setup() {
+    const setHeight = (items: HTMLElement): void => {
+      // explicitly set height so that it can be transitioned
+      items.style.height = `${items.scrollHeight}px`;
+    };
+
+    const unsetHeight = (items: HTMLElement): void => {
+      items.style.height = "";
+    };
+
+    return { setHeight, unsetHeight };
+  },
+});

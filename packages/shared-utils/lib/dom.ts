@@ -20,6 +20,18 @@ export const changeClass = (
   domClass.add(...insert, ...oldClasses);
 };
 
+export const addMatchMediaListener = (
+  mediaQueryString: string,
+  handler: (event: MediaQueryListEvent) => void
+): void => {
+  const mediaQueryList = window.matchMedia(mediaQueryString);
+
+  if (mediaQueryList.addEventListener)
+    mediaQueryList.addEventListener("change", handler);
+  else mediaQueryList.addListener(handler);
+};
+
 export default {
+  addMatchMediaListener,
   changeClass,
 };

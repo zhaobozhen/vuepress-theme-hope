@@ -64,6 +64,7 @@ export default class Common extends Mixins(GlobalEncryptMixin) {
   }
 
   /** 页面 Class */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private get pageClasses(): any {
     const userPageClass = this.$page.frontmatter.pageClass as
       | string
@@ -95,9 +96,8 @@ export default class Common extends Mixins(GlobalEncryptMixin) {
     });
   }
 
-  private toggleSidebar(to: any): void {
-    console.log("to", to);
-    this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
+  private toggleSidebar(open: boolean): void {
+    this.isSidebarOpen = typeof open === "boolean" ? open : !this.isSidebarOpen;
     this.$emit("toggle-sidebar", this.isSidebarOpen);
   }
 

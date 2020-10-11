@@ -1,84 +1,109 @@
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import {
+  PropType,
+  computed,
+  defineComponent,
+  nextTick,
+  ref,
+} from "@vue/composition-api";
+import { i18n } from "@mr-hope/vuepress-shared-utils";
+import Valine from "valine";
+
 import { Route } from "vue-router";
 import { ValineOptions } from "../types";
-import { i18n } from "@mr-hope/vuepress-shared-utils";
 
-@Component
-export default class Valine extends Vue {
-  @Prop({ type: Object, default: () => ({}) })
-  private readonly valineConfig!: ValineOptions;
+export default defineComponent({
+  name: "Valine",
 
-  private get valineEnable(): boolean {
-    const { valineConfig } = this;
+  props: {
+    valineConfig: {
+      type: Object as PropType<ValineOptions>,
+      required: true,
+    },
+  },
 
-    return Boolean(valineConfig && valineConfig.appId && valineConfig.appKey);
-  }
+  setup(props) {
+    const valineEnable = computed(() =>
+      Boolean(
+        props.valineConfig &&
+          props.valineConfig.appId &&
+          props.valineConfig.appKey
+      )
+    );
 
-  private get commentDisplay(): boolean {
-    if (!this.valineEnable) return false;
-    const globalEnable = this.valineConfig.comment !== false;
-    const pageEnable = this.$page.frontmatter.comment as boolean | undefined;
+    const valine = ref(null as Valine | null);
 
-    return (globalEnable && pageEnable !== false) || pageEnable === true;
-  }
+    return { valine, valineEnable };
+  },
 
-  /** Whether to display view number */
-  private get visitorDisplay(): boolean {
-    if (!this.valineEnable) return false;
-    const globalEnable = this.valineConfig.visitor !== false;
-    const pageEnable = this.$page.frontmatter.visitor as boolean | undefined;
+  computed: {
+    commentDisplay(): boolean {
+      if (!this.valineEnable) return false;
+      const globalEnable = this.valineConfig.comment !== false;
+      const pageEnable = this.$page.frontmatter.comment as boolean | undefined;
 
-    return (globalEnable && pageEnable !== false) || pageEnable === true;
-  }
+      return (globalEnable && pageEnable !== false) || pageEnable === true;
+    },
 
-  private mounted(): void {
+    /** Whether to display view number */
+    visitorDisplay(): boolean {
+      if (!this.valineEnable) return false;
+      const globalEnable = this.valineConfig.visitor !== false;
+      const pageEnable = this.$page.frontmatter.visitor as boolean | undefined;
+
+      return (globalEnable && pageEnable !== false) || pageEnable === true;
+    },
+  },
+
+  watch: {
+    $route(to: Route, from: Route): void {
+      if (to.path !== from.path)
+        // Refresh comment when navigating to a new page
+        nextTick(() => {
+          this.initValine(to.path);
+        });
+    },
+  },
+
+  mounted(): void {
     if (this.valineEnable) {
       // eslint-disable-next-line
       const AV = require("leancloud-storage");
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       if (typeof window !== "undefined") window.AV = AV;
+      this.valine = new Valine();
+
+      nextTick(() => this.initValine(this.$route.path));
     }
+  },
 
-    this.valine(this.$route.path);
-  }
+  methods: {
+    initValine(path: string): void {
+      const { valineConfig } = this;
 
-  @Watch("$route")
-  onRouteChange(to: Route, from: Route): void {
-    if (to.path !== from.path)
-      // Refresh comment when navigating to a new page
-      Vue.nextTick(() => {
-        this.valine(to.path);
-      });
-  }
-
-  // Init valine
-  private valine(path: string): void {
-    const { valineConfig } = this;
-    // eslint-disable-next-line
-    const valine = new (require("valine"))();
-
-    // eslint-disable-next-line
-    valine.init({
-      el: "#valine",
-      appId: valineConfig.appId, // Your appId
-      appKey: valineConfig.appKey, // Your appKey
-      placeholder:
-        valineConfig.placeholder ||
-        i18n.getLocale(this.$lang).valineHolder ||
-        i18n.getDefaultLocale().valineHolder,
-      meta: valineConfig.meta || ["nick", "mail", "link"],
-      requiredFields: valineConfig.requiredFields || ["nick"],
-      avatar: valineConfig.avatar || "retro",
-      visitor: this.visitorDisplay,
-      recordIP: valineConfig.recordIP || false,
-      path:
-        path || (typeof window === "undefined" ? "" : window.location.pathname),
-      pageSize: valineConfig.pageSize || 10,
-      enableQQ: valineConfig.enableQQ || true,
-      emojiCDN: valineConfig.emojiCDN || "",
-      emojiMaps: valineConfig.emojiMaps || null,
-      lang: this.$lang === "zh-CN" ? "zh-CN" : "en",
-    });
-  }
-}
+      if (this.valine)
+        this.valine.init({
+          el: "#valine",
+          appId: valineConfig.appId,
+          appKey: valineConfig.appKey,
+          placeholder:
+            valineConfig.placeholder ||
+            i18n.getLocale(this.$lang).valineHolder ||
+            i18n.getDefaultLocale().valineHolder,
+          meta: valineConfig.meta || ["nick", "mail", "link"],
+          requiredFields: valineConfig.requiredFields || ["nick"],
+          avatar: valineConfig.avatar || "retro",
+          visitor: this.visitorDisplay,
+          recordIP: valineConfig.recordIP || false,
+          path:
+            path ||
+            (typeof window === "undefined" ? "" : window.location.pathname),
+          pageSize: valineConfig.pageSize || 10,
+          enableQQ: valineConfig.enableQQ || true,
+          emojiCDN: valineConfig.emojiCDN || "",
+          emojiMaps: valineConfig.emojiMaps,
+          lang: this.$lang === "zh-CN" ? "zh-CN" : "en",
+        });
+    },
+  },
+});

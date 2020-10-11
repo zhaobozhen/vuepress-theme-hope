@@ -1,10 +1,6 @@
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { ComponentOptions, CreateElement, VNode } from "vue";
-import {
-  SidebarHeader,
-  SidebarHeaderItem,
-  groupSidebarHeaders,
-} from "@theme/util/sidebar";
+import { PropType, defineComponent, h } from "@vue/composition-api";
+import { CreateElement, VNode } from "vue";
+import { SidebarHeader, groupSidebarHeaders } from "@theme/util/sidebar";
 import { Route } from "vue-router";
 import { isActive } from "@theme/util/path";
 
@@ -82,44 +78,34 @@ const renderChildren = (
   );
 };
 
-// Functional Component Hack
-interface FunctionalComponentOptions extends ComponentOptions<Vue> {
-  functional?: boolean;
-}
+export default defineComponent({
+  props: {
+    header: {
+      type: Array as PropType<SidebarHeader[]>,
+      default: (): SidebarHeader[] => [],
+    },
+  },
+  setup(props, { root }) {
+    const { $page, $route, $themeConfig, $themeLocaleConfig } = root;
 
-interface SidebarLinkProps {
-  header: SidebarHeaderItem[];
-}
-
-@Component({
-  functional: true,
-  render(
-    h,
-    { parent: { $page, $route, $themeConfig, $themeLocaleConfig }, props }
-  ) {
-    /** 当前渲染项目配置 */
-    const { header } = props as SidebarLinkProps;
     /** 最大显示深度 */
     const maxDepth =
       (($page.frontmatter.sidebarDepth as number | undefined) ||
         ($themeLocaleConfig.sidebarDepth as number | undefined) ||
         $themeConfig.sidebarDepth ||
         2) + 1;
-    const children = groupSidebarHeaders(header);
+    const children = groupSidebarHeaders(props.header);
 
-    return h("aside", { attrs: { id: "anchor" } }, [
-      h("div", { class: "anchor-wrapper" }, [
-        renderChildren(h, {
-          children,
-          path: $route.path,
-          route: $route,
-          maxDepth,
-        }),
-      ]),
-    ]);
+    return (): VNode =>
+      h("aside", { attrs: { id: "anchor" } }, [
+        h("div", { class: "anchor-wrapper" }, [
+          renderChildren(h, {
+            children,
+            path: $route.path,
+            route: $route,
+            maxDepth,
+          }),
+        ]),
+      ]);
   },
-} as FunctionalComponentOptions)
-export default class Anchor extends Vue {
-  @Prop({ type: Array, default: () => [] })
-  private readonly header!: SidebarHeader[];
-}
+});

@@ -37,8 +37,8 @@
     </MyTransition>
 
     <!-- 页脚 -->
-    <MyTransition :delay="0.32">
-      <PageFooter :key="$route.path" />
+    <MyTransition :key="`footer-${$route.path}`" :delay="0.32">
+      <PageFooter />
     </MyTransition>
   </div>
 </template>

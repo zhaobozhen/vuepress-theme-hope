@@ -1,10 +1,12 @@
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { SidebarHeaderItem, SidebarItem } from "@theme/util/sidebar";
-import { PageComputed } from "@mr-hope/vuepress-types";
-import { Route } from "vue-router";
+import { PropType, defineComponent, ref } from "@vue/composition-api";
+import { isActive } from "@theme/util/path";
+
 import SidebarGroup from "@theme/components/SidebarGroup.vue";
 import SidebarLink from "@theme/components/SidebarLink.vue";
-import { isActive } from "@theme/util/path";
+
+import { PageComputed } from "@mr-hope/vuepress-types";
+import { Route } from "vue-router";
+import { SidebarHeaderItem, SidebarItem } from "@theme/util/sidebar";
 
 /** 当前项目是否激活 */
 const descendantIsActive = (route: Route, item: SidebarItem): boolean => {
@@ -26,37 +28,49 @@ const resolveOpenGroupIndex = (route: Route, items: SidebarItem[]): number => {
   return -1;
 };
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-@Component({ components: { SidebarGroup, SidebarLink } })
-export default class SidebarLinks extends Vue {
-  @Prop(Array)
-  private readonly items!: SidebarItem[];
+export default defineComponent({
+  name: "SidebarLinks",
 
-  @Prop(Number)
-  private readonly depth!: number;
+  components: { SidebarGroup, SidebarLink },
 
-  private openGroupIndex = 0;
+  props: {
+    items: {
+      type: Array as PropType<SidebarItem[]>,
+      default: (): SidebarItem[] => [],
+    },
 
-  private refreshIndex(): void {
-    const index = resolveOpenGroupIndex(this.$route, this.items);
+    depth: { type: Number, default: 0 },
+  },
 
-    if (index > -1) this.openGroupIndex = index;
-  }
+  setup() {
+    const openGroupIndex = ref(0);
 
-  private toggleGroup(index: number): void {
-    this.openGroupIndex = index === this.openGroupIndex ? -1 : index;
-  }
+    const toggleGroup = (index: number): void => {
+      openGroupIndex.value = index === openGroupIndex.value ? -1 : index;
+    };
 
-  private isActive(page: PageComputed): boolean {
-    return isActive(this.$route, page.regularPath);
-  }
+    return { openGroupIndex, toggleGroup };
+  },
 
-  private created(): void {
+  watch: {
+    $route(): void {
+      this.refreshIndex();
+    },
+  },
+
+  created(): void {
     this.refreshIndex();
-  }
+  },
 
-  @Watch("$route")
-  onRouteUpdate(): void {
-    this.refreshIndex();
-  }
-}
+  methods: {
+    refreshIndex(): void {
+      const index = resolveOpenGroupIndex(this.$route, this.items);
+
+      if (index > -1) this.openGroupIndex = index;
+    },
+
+    isActive(page: PageComputed): boolean {
+      return isActive(this.$route, page.regularPath);
+    },
+  },
+});

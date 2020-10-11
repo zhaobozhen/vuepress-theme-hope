@@ -1,24 +1,32 @@
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { defineComponent, nextTick, ref } from "@vue/composition-api";
 
-@Component
-export default class Password extends Vue {
-  @Prop({ type: Boolean, default: false })
-  private readonly page!: boolean;
+export default defineComponent({
+  name: "Password",
 
-  private password = "";
+  props: {
+    page: { type: Boolean, default: false },
+  },
 
-  private hasTried = false;
+  setup(_, { emit }) {
+    const password = ref("");
+    const hasTried = ref(false);
+    const verify = (): void => {
+      hasTried.value = false;
+      // TODO: Add in Vue3
+      // eslint-disable-next-line vue/require-explicit-emits
+      emit("password-verify", password.value);
 
-  private get isMainPage(): boolean {
-    return this.$frontmatter.home === true;
-  }
+      void nextTick().then(() => {
+        hasTried.value = true;
+      });
+    };
 
-  private verify(): void {
-    this.hasTried = false;
-    this.$emit("password-verify", this.password);
+    return { hasTried, password, verify };
+  },
 
-    void Vue.nextTick().then(() => {
-      this.hasTried = true;
-    });
-  }
-}
+  computed: {
+    isMainPage(): boolean {
+      return this.$frontmatter.home === true;
+    },
+  },
+});

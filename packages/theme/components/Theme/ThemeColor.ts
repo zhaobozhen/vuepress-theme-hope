@@ -1,17 +1,23 @@
-import { Component, Vue } from "vue-property-decorator";
+import { defineComponent, ref } from "@vue/composition-api";
 import ClickOutside from "@theme/util/click-outside";
 import ThemeOptions from "@theme/components/Theme/ThemeOptions.vue";
 
-@Component({
-  directives: { "click-outside": ClickOutside },
+export default defineComponent({
+  name: "ThemeColor",
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   components: { ThemeOptions },
-})
-export default class ThemeColor extends Vue {
-  private showMenu = false;
 
-  private clickOutside(): void {
-    this.showMenu = false;
-  }
-}
+  directives: {
+    "click-outside": ClickOutside,
+  },
+
+  setup() {
+    const showMenu = ref(false);
+
+    const clickOutside = (): void => {
+      showMenu.value = false;
+    };
+
+    return { clickOutside, showMenu };
+  },
+});

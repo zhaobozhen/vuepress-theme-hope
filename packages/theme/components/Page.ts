@@ -1,17 +1,20 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { PropType, defineComponent, ref } from "@vue/composition-api";
+
 import Anchor from "@theme/components/Anchor.vue";
 import Comment from "@Comment";
 import MyTransition from "@theme/components/MyTransition.vue";
 import PageEdit from "@theme/components/PageEdit.vue";
 import PageFooter from "@theme/components/PageFooter.vue";
-import { PageHeader } from "@mr-hope/vuepress-types";
 import PageInfo from "@PageInfo";
 import PageNav from "@theme/components/PageNav.vue";
 import Password from "@theme/components/Password.vue";
+
+import { PageHeader } from "@mr-hope/vuepress-types";
 import { SidebarItem } from "@theme/util/sidebar";
 
-@Component({
+export default defineComponent({
+  name: "Page",
+
   components: {
     Anchor,
     Comment,
@@ -22,36 +25,47 @@ import { SidebarItem } from "@theme/util/sidebar";
     PageNav,
     Password,
   },
-})
-export default class Page extends Vue {
-  @Prop({ type: Array, default: () => [] })
-  private readonly sidebarItems!: SidebarItem[];
 
-  @Prop({ type: Array, default: () => [] })
-  private readonly headers!: PageHeader[];
+  props: {
+    sidebarItems: {
+      type: Array as PropType<SidebarItem[]>,
+      default: (): SidebarItem[] => [],
+    },
 
-  /** 用户输入的密码 */
-  private password = "";
+    headers: {
+      type: Array as PropType<PageHeader[]>,
+      default: (): PageHeader[] => [],
+    },
+  },
 
-  /** 是否启用评论 */
-  private commentEnable(): boolean {
-    return this.$themeConfig.comment !== false;
-  }
+  setup() {
+    /** 用户输入的密码 */
+    const password = ref("");
 
-  /** 当前页面密码 */
-  private get pagePassword(): string {
-    /** 页面当前密码 */
-    const { password } = this.$frontmatter;
+    return { password };
+  },
 
-    return typeof password === "number"
-      ? password.toString()
-      : typeof password === "string"
-      ? password
-      : "";
-  }
+  computed: {
+    /** 是否启用评论 */
+    commentEnable(): boolean {
+      return this.$themeConfig.comment !== false;
+    },
 
-  /** 当前页面解密状态 */
-  private get pageDescrypted(): boolean {
-    return this.password === this.pagePassword;
-  }
-}
+    /** 当前页面密码 */
+    pagePassword(): string {
+      /** 页面当前密码 */
+      const { password } = this.$frontmatter;
+
+      return typeof password === "number"
+        ? password.toString()
+        : typeof password === "string"
+        ? password
+        : "";
+    },
+
+    /** 当前页面解密状态 */
+    pageDescrypted(): boolean {
+      return this.password === this.pagePassword;
+    },
+  },
+});

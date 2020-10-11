@@ -1,4 +1,5 @@
-import { Component, Vue } from "vue-property-decorator";
+import { defineComponent } from "@vue/composition-api";
+
 import Baidu from "@mr-hope/vuepress-shared-utils/icons/media/Baidu.vue";
 import Dingding from "@mr-hope/vuepress-shared-utils/icons/media/Dingding.vue";
 import Dribbble from "@mr-hope/vuepress-shared-utils/icons/media/Dribbble.vue";
@@ -23,6 +24,7 @@ import Weibo from "@mr-hope/vuepress-shared-utils/icons/media/Weibo.vue";
 import Whatsapp from "@mr-hope/vuepress-shared-utils/icons/media/Whatsapp.vue";
 import Youtube from "@mr-hope/vuepress-shared-utils/icons/media/Youtube.vue";
 import Zhihu from "@mr-hope/vuepress-shared-utils/icons/media/Zhihu.vue";
+
 import { BlogMedia } from "@theme/types";
 
 /** 合法媒体 */
@@ -58,7 +60,9 @@ interface MediaLink {
   url: string;
 }
 
-@Component({
+export default defineComponent({
+  name: "MediaLinks",
+
   components: {
     Baidu,
     Dingding,
@@ -85,34 +89,35 @@ interface MediaLink {
     Youtube,
     Zhihu,
   },
-})
-export default class MediaLinks extends Vue {
-  private get mediaLink(): Partial<Record<BlogMedia, string>> | false {
-    const { medialink } = this.$frontmatter;
 
-    return medialink === false
-      ? false
-      : typeof medialink === "object"
-      ? (medialink as Partial<Record<BlogMedia, string>>)
-      : this.$themeConfig.blog
-      ? this.$themeConfig.blog.links || false
-      : false;
-  }
+  computed: {
+    mediaLink(): Partial<Record<BlogMedia, string>> | false {
+      const { medialink } = this.$frontmatter;
 
-  private get links(): MediaLink[] {
-    if (this.mediaLink) {
-      const links: MediaLink[] = [];
+      return medialink === false
+        ? false
+        : typeof medialink === "object"
+        ? (medialink as Partial<Record<BlogMedia, string>>)
+        : this.$themeConfig.blog
+        ? this.$themeConfig.blog.links || false
+        : false;
+    },
 
-      for (const media in this.mediaLink)
-        if (medias.includes(media as BlogMedia))
-          links.push({
-            icon: media,
-            url: this.mediaLink[media as BlogMedia] as string,
-          });
+    links(): MediaLink[] {
+      if (this.mediaLink) {
+        const links: MediaLink[] = [];
 
-      return links;
-    }
+        for (const media in this.mediaLink)
+          if (medias.includes(media as BlogMedia))
+            links.push({
+              icon: media,
+              url: this.mediaLink[media as BlogMedia] as string,
+            });
 
-    return [];
-  }
-}
+        return links;
+      }
+
+      return [];
+    },
+  },
+});

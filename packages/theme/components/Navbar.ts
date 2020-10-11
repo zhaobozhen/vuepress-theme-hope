@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { Component, Vue } from "vue-property-decorator";
-import { AlgoliaOption } from "@mr-hope/vuepress-types";
+import { defineComponent, ref } from "@vue/composition-api";
+
 import AlgoliaSearchBox from "@AlgoliaSearchBox";
 import NavLinks from "@theme/components/NavLinks.vue";
 import SearchBox from "@SearchBox";
 import SidebarButton from "@theme/components/SidebarButton.vue";
 import ThemeColor from "@ThemeColor";
+
+import { AlgoliaOption } from "@mr-hope/vuepress-types";
 
 const css = (
   el: Element,
@@ -27,7 +28,9 @@ const css = (
   return window!.getComputedStyle(el, null)[property] as string;
 };
 
-@Component({
+export default defineComponent({
+  name: "Navbar",
+
   components: {
     AlgoliaSearchBox,
     NavLinks,
@@ -35,25 +38,30 @@ const css = (
     SidebarButton,
     ThemeColor,
   },
-})
-export default class Navbar extends Vue {
-  private linksWrapMaxWidth = 0;
 
-  /** Algolia 配置 */
-  private get algolia(): AlgoliaOption | false {
-    return (
-      this.$themeLocaleConfig.algolia || this.$themeConfig.algolia || false
-    );
-  }
+  setup() {
+    const linksWrapMaxWidth = ref(0);
 
-  /** 是否使用 Algolia 搜索 */
-  private get isAlgoliaSearch(): boolean {
-    return Boolean(
-      this.algolia && this.algolia.apiKey && this.algolia.indexName
-    );
-  }
+    return { linksWrapMaxWidth };
+  },
 
-  private mounted(): void {
+  computed: {
+    /** Algolia 配置 */
+    algolia(): AlgoliaOption | false {
+      return (
+        this.$themeLocaleConfig.algolia || this.$themeConfig.algolia || false
+      );
+    },
+
+    /** 是否使用 Algolia 搜索 */
+    isAlgoliaSearch(): boolean {
+      return Boolean(
+        this.algolia && this.algolia.apiKey && this.algolia.indexName
+      );
+    },
+  },
+
+  mounted(): void {
     // Refer to config.styl
     const MOBILE_DESKTOP_BREAKPOINT = 719;
     const NAVBAR_VERTICAL_PADDING =
@@ -74,5 +82,5 @@ export default class Navbar extends Vue {
     handleLinksWrapWidth();
     window.addEventListener("resize", handleLinksWrapWidth, false);
     window.onorientationchange = (): (() => void) => handleLinksWrapWidth;
-  }
-}
+  },
+});

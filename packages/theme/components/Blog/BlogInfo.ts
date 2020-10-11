@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { ArticleMixin, StickyMixin } from "@theme/util/articleMixin";
 import { Component, Mixins } from "vue-property-decorator";
 import { HopeLangI18nConfig, i18n } from "@mr-hope/vuepress-shared-utils";
+
 import ArticleIconFill from "@mr-hope/vuepress-shared-utils/icons/ArticleIconFill.vue";
 import ArticleList from "@theme/components/Blog/ArticleList.vue";
 import BloggerInfo from "@theme/components/Blog/BloggerInfo.vue";

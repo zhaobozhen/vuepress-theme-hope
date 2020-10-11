@@ -1,16 +1,22 @@
-import { Component, Vue } from "vue-property-decorator";
-import ArticleList from "@theme/components/Blog/ArticleList.vue";
+import { defineComponent } from "@vue/composition-api";
 import { capitalize } from "@mr-hope/vuepress-shared-utils";
 import navigate from "@theme/util/navigate";
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-@Component({ components: { ArticleList } })
-export default class CategoryList extends Vue {
-  /** 大写首字母 */
-  private capitalize = (name: string): string => capitalize(name);
+import ArticleList from "@theme/components/Blog/ArticleList.vue";
 
-  /** 点击分类的导航 */
-  private clickCategory(path: string): void {
-    navigate(path, this.$router, this.$route);
-  }
-}
+export default defineComponent({
+  name: "CategoryList",
+
+  components: { ArticleList },
+
+  setup() {
+    return { capitalize };
+  },
+
+  methods: {
+    /** 点击分类的导航 */
+    clickCategory(path: string): void {
+      navigate(path, this.$router, this.$route);
+    },
+  },
+});

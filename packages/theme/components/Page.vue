@@ -1,25 +1,28 @@
 <template>
   <main class="page">
     <!-- 路径导航 -->
-    <MyTransition>
-      <BreadCrumb :key="$route.path" />
+    <MyTransition :key="`breadcrumb-${$route.path}`">
+      <BreadCrumb />
     </MyTransition>
 
     <slot name="top" />
 
     <!-- 页面信息 -->
-    <MyTransition v-if="commentEnable" :delay="0.04">
-      <PageInfo :key="$route.path" />
+    <MyTransition
+      v-if="commentEnable"
+      :key="`pageinfo-${$route.path}`"
+      :delay="0.04"
+    >
+      <PageInfo />
     </MyTransition>
 
     <!-- 页面密码 -->
-    <MyTransition :delay="0.08">
-      <Password
-        v-if="pagePassword && !pageDescrypted"
-        :key="$route.path"
-        :page="true"
-        @password-verify="password = $event"
-      />
+    <MyTransition
+      v-if="pagePassword && !pageDescrypted"
+      :key="`password-${$route.path}`"
+      :delay="0.08"
+    >
+      <Password :page="true" @password-verify="password = $event" />
     </MyTransition>
 
     <!-- 页面内容 -->
@@ -28,18 +31,26 @@
     </MyTransition>
 
     <!-- 编辑链接 -->
-    <MyTransition v-if="!pagePassword || pageDescrypted" :delay="0.12">
-      <Anchor :key="$route.path" :header="headers" />
+    <MyTransition
+      v-if="!pagePassword || pageDescrypted"
+      :key="`anchor-${$route.path}`"
+      :delay="0.12"
+    >
+      <Anchor :header="headers" />
     </MyTransition>
 
     <!-- 编辑链接 -->
     <MyTransition v-if="!pagePassword || pageDescrypted" :delay="0.12">
-      <PageEdit :key="$route.path" />
+      <PageEdit />
     </MyTransition>
 
     <!-- 页面导航 -->
-    <MyTransition v-if="!pagePassword || pageDescrypted" :delay="0.14">
-      <PageNav :key="$route.path" v-bind="{ sidebarItems }" />
+    <MyTransition
+      v-if="!pagePassword || pageDescrypted"
+      :key="`edit-${$route.path}`"
+      :delay="0.14"
+    >
+      <PageNav v-bind="{ sidebarItems }" />
     </MyTransition>
 
     <!-- 页面评论 -->
@@ -47,12 +58,12 @@
       v-if="(!pagePassword || pageDescrypted) && commentEnable"
       :delay="0.16"
     >
-      <Comment :key="$route.path" />
+      <Comment :key="`comment-${$route.path}`" />
     </MyTransition>
 
     <!-- 页脚 -->
-    <MyTransition :delay="0.2">
-      <PageFooter :key="$route.path" />
+    <MyTransition :key="`footer-${$route.path}`" :delay="0.2">
+      <PageFooter />
     </MyTransition>
 
     <slot name="bottom" />

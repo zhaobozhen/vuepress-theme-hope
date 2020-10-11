@@ -1,60 +1,68 @@
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { PropType, computed, defineComponent } from "@vue/composition-api";
 import { ensureExt, isExternal, isMailto, isTel } from "@theme/util/path";
 import { NavBarConfigItem } from "@theme/util/navbar";
 
-@Component
-export default class NavLink extends Vue {
-  @Prop({ type: Object, required: true })
-  private readonly item!: NavBarConfigItem;
+export default defineComponent({
+  name: "NavLink",
 
-  private get link(): string {
-    return ensureExt(this.item.link as string);
-  }
+  props: {
+    item: { type: Object as PropType<NavBarConfigItem>, required: true },
+  },
 
-  private get iconPrefix(): string {
-    const { iconPrefix } = this.$themeConfig;
+  setup(props, { emit }) {
+    const link = computed(() =>
+      props.item.link ? ensureExt(props.item.link) : ""
+    );
 
-    return iconPrefix === "" ? "" : iconPrefix || "icon-";
-  }
+    const isNonHttpURI = computed(
+      () => isMailto(link.value) || isTel(link.value)
+    );
 
-  private get exact(): boolean {
-    if (this.$site.locales)
-      return Object.keys(this.$site.locales).some(
-        (rootLink) => rootLink === this.link
-      );
+    const target = computed(() => {
+      if (isNonHttpURI.value) return null;
 
-    return this.link === "/";
-  }
+      if (props.item.target) return props.item.target;
 
-  private get isNonHttpURI(): boolean {
-    return isMailto(this.link) || isTel(this.link);
-  }
+      return isExternal(link.value) ? "_blank" : "";
+    });
 
-  private get isBlankTarget(): boolean {
-    return this.target === "_blank";
-  }
+    const isBlankTarget = computed(() => target.value === "_blank");
 
-  private get isInternal(): boolean {
-    return !isExternal(this.link) && !this.isBlankTarget;
-  }
+    const isInternal = computed(
+      () => !isExternal(link.value) && !isBlankTarget.value
+    );
 
-  private get target(): string | null {
-    if (this.isNonHttpURI) return null;
+    const rel = computed(() => {
+      if (isNonHttpURI.value) return null;
+      if (props.item.rel === false) return null;
+      if (props.item.rel) return props.item.rel;
 
-    if (this.item.target) return this.item.target;
+      return isBlankTarget.value ? "noopener noreferrer" : null;
+    });
 
-    return isExternal(this.link) ? "_blank" : "";
-  }
+    const focusoutAction = (): void => {
+      // TODO: Add in Vue3
+      // eslint-disable-next-line vue/require-explicit-emits
+      emit("focusout");
+    };
 
-  private get rel(): string | null {
-    if (this.isNonHttpURI) return null;
-    if (this.item.rel === false) return null;
-    if (this.item.rel) return this.item.rel;
+    return { link, isBlankTarget, isInternal, rel, target, focusoutAction };
+  },
 
-    return this.isBlankTarget ? "noopener noreferrer" : null;
-  }
+  computed: {
+    iconPrefix(): string {
+      const { iconPrefix } = this.$themeConfig;
 
-  private focusoutAction(): void {
-    this.$emit("focusout");
-  }
-}
+      return iconPrefix === "" ? "" : iconPrefix || "icon-";
+    },
+
+    exact(): boolean {
+      if (this.$site.locales)
+        return Object.keys(this.$site.locales).some(
+          (rootLink) => rootLink === this.link
+        );
+
+      return this.link === "/";
+    },
+  },
+});

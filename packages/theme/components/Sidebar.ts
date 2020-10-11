@@ -1,21 +1,28 @@
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { BlogOptions } from "@theme/types";
+import { PropType, defineComponent } from "@vue/composition-api";
+
 import BloggerInfo from "@theme/components/Blog/BloggerInfo.vue";
 import NavLinks from "@theme/components/NavLinks.vue";
-import { SidebarItem } from "@theme/util/sidebar";
 import SidebarLinks from "@theme/components/SidebarLinks.vue";
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-@Component({ components: { BloggerInfo, SidebarLinks, NavLinks } })
-export default class Sidebar extends Vue {
-  @Prop({ type: Array, required: true })
-  private readonly items!: SidebarItem[];
+import { BlogOptions } from "@theme/types";
+import { SidebarItem } from "@theme/util/sidebar";
 
-  private get blogConfig(): BlogOptions {
-    return this.$themeConfig.blog || {};
-  }
+export default defineComponent({
+  name: "Sidebar",
 
-  private get sidebarDisplay(): "mobile" | "none" | "always" {
-    return this.blogConfig.sidebarDisplay || "none";
-  }
-}
+  components: { BloggerInfo, SidebarLinks, NavLinks },
+
+  props: {
+    items: { type: Array as PropType<SidebarItem[]>, required: true },
+  },
+
+  computed: {
+    blogConfig(): BlogOptions {
+      return this.$themeConfig.blog || {};
+    },
+
+    sidebarDisplay(): "mobile" | "none" | "always" {
+      return this.blogConfig.sidebarDisplay || "none";
+    },
+  },
+});

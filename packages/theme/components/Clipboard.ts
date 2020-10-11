@@ -1,33 +1,37 @@
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { defineComponent, ref } from "@vue/composition-api";
 
-@Component
-export default class Clipboard extends Vue {
-  @Prop({ type: String, default: "" })
-  private readonly html!: string;
+export default defineComponent({
+  name: "Clipboard",
 
-  @Prop({ type: String, default: "en-US" })
-  private readonly lang!: string;
+  props: {
+    html: { type: String, default: "" },
+    lang: { type: String, default: "en-US" },
+  },
 
-  private location = "";
+  setup() {
+    const location = ref("");
 
-  private get copyright(): string {
-    /** 作者 */
-    const { author } = this.$themeConfig;
-    /** 内容 */
-    const content: Record<string, string> = {
-      "zh-CN": `${this.html}\n-----\n${
-        author ? `著作权归${author}所有。\n` : ""
-      }链接：${this.location}`,
-      "en-US": `${this.html}\n-----\n${
-        author ? `Copyright by ${author}.\n` : ""
-      }Link: ${this.location}`,
-    };
-
-    return content[this.lang];
-  }
-
-  private created(): void {
     if (typeof window !== "undefined")
-      this.location = window.location.toString();
-  }
-}
+      location.value = window.location.toString();
+
+    return { location };
+  },
+
+  computed: {
+    copyright(): string {
+      /** 作者 */
+      const { author } = this.$themeConfig;
+      /** 内容 */
+      const content: Record<string, string> = {
+        "zh-CN": `${this.html}\n-----\n${
+          author ? `著作权归${author}所有。\n` : ""
+        }链接：${this.location}`,
+        "en-US": `${this.html}\n-----\n${
+          author ? `Copyright by ${author}.\n` : ""
+        }Link: ${this.location}`,
+      };
+
+      return content[this.lang];
+    },
+  },
+});

@@ -1,32 +1,42 @@
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { SidebarAutoItem, SidebarGroupItem } from "@theme/util/sidebar";
-import DropdownTransition from "@theme/components/DropdownTransition.vue";
+import { PropType, defineComponent } from "@vue/composition-api";
 import { isActive } from "@theme/util/path";
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-@Component({ components: { DropdownTransition } })
-export default class SidebarGroup extends Vue {
-  @Prop({ type: Object, default: () => ({}) })
-  private readonly item!: SidebarAutoItem | SidebarGroupItem;
+import DropdownTransition from "@theme/components/DropdownTransition.vue";
 
-  @Prop(Boolean)
-  private readonly open!: boolean;
+import { SidebarAutoItem, SidebarGroupItem } from "@theme/util/sidebar";
 
-  @Prop(Number)
-  private readonly depth!: number;
+export default defineComponent({
+  name: "SidebarGroup",
 
-  private isActive = isActive;
+  components: { DropdownTransition },
 
-  private getIcon(icon: string | undefined): string {
-    const { iconPrefix } = this.$themeConfig;
+  props: {
+    item: {
+      type: Object as PropType<SidebarAutoItem | SidebarGroupItem>,
+      required: true,
+    },
 
-    return this.$themeConfig.sidebarIcon !== false && icon
-      ? `${iconPrefix === "" ? "" : iconPrefix || "icon-"}${icon}`
-      : "";
-  }
+    open: { type: Boolean, default: false },
 
-  private beforeCreate(): void {
+    depth: { type: Number, default: 0 },
+  },
+
+  setup() {
+    return { isActive };
+  },
+
+  beforeCreate(): void {
     // eslint-disable-next-line
     this.$options.components!.SidebarLinks = require("@theme/components/SidebarLinks.vue").default;
-  }
-}
+  },
+
+  methods: {
+    getIcon(icon: string | undefined): string {
+      const { iconPrefix } = this.$themeConfig;
+
+      return this.$themeConfig.sidebarIcon !== false && icon
+        ? `${iconPrefix === "" ? "" : iconPrefix || "icon-"}${icon}`
+        : "";
+    },
+  },
+});
