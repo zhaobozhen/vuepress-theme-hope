@@ -1,4 +1,5 @@
 ---
+title: Plugin Description
 category: config
 copyright:
   minLength: 10
@@ -7,11 +8,11 @@ tags:
   - config
 ---
 
-# Plugin Description
+vuepress-theme-hope brings you many vuepress plugins. Some plugins are automatically enabled. If you don’t need them, you can disable them in themeConfig; some plugins will only be enabled if you configure them.
 
-vuepress-theme-hope has many vuepress plugins enabled. If you don't need them, you can disable them in themeConfig.
+<!-- more -->
 
-## Plugins build-in
+## Build-in plugins
 
 - [@mr-hope/vuepress-plugin-comment](https://vuepress-comment.mrhope.site/en/): Comment and page info feature
 
@@ -27,7 +28,7 @@ vuepress-theme-hope has many vuepress plugins enabled. If you don't need them, y
 
 - [@mr-hope/vuepress-plugin-sitemap](sitemap.md): Sitemap Generator for your site
 
-- [vuepress-plugin-md-enhance](https://vuepress-md-enhance.mrhope.site/): Provide more Markdown syntax
+- [vuepress-plugin-md-enhance](https://vuepress-md-enhance.mrhope.site/en/): Provide more Markdown syntax
 
 - [vuepress-plugin-photo-swipe](photo-swipe.md): Make the site's picture support click zoom
 

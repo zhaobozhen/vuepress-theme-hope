@@ -2,7 +2,7 @@ const resolve = require("vuepress-theme-hope/resolve");
 
 module.exports = resolve({
   title: "评论插件",
-  description: "Vuepress 的 评论插件",
+  description: "Vuepress 的评论插件",
 
   headOption: {
     icon: "/favicon.ico",
@@ -83,11 +83,14 @@ module.exports = resolve({
     iconPrefix: "vuepress-",
 
     footer: {
+      display: true,
       copyright: "MIT Licensed | Copyright © 2019-present Mr.Hope",
     },
+
     markdown: {
       enableAll: true,
     },
+
     comment: {
       type: "valine",
       appId: "GG2VSnGiz09Rx18y2OUzdaHS-gzGzoHsz",
@@ -155,6 +158,7 @@ module.exports = resolve({
         },
       },
     },
+
     hostname: "https://vuepress-comment.mrhope.site/",
 
     repo: "https://github.com/mister-hope/vuepress-theme-hope",

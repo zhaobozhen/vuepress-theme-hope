@@ -1,12 +1,11 @@
 ---
+title: Page Configuration
 icon: configuration
 category: config
 tags:
   - config
   - frontmatter
 ---
-
-# Page Configuration
 
 The following configuration options have been added to the page's Front Matter:
 
@@ -43,6 +42,13 @@ Show the author of the current page. If you don't fill it, you will fall back to
 ::: tip
 When the global default author is enabled, you can set `false` to cancel the author display
 :::
+
+### original
+
+- Type: `boolean`
+- Default: `false`
+
+Whether the current article is original.
 
 ### time
 
@@ -218,12 +224,15 @@ Set the social link for the current page footer.
 The optional values of `MediaType` are as follows:
 
 - `'Baidu'`: Baidu
+- `'Bitbucket'`: Bitbucket
 - `'Dingding'`: Dingding
+- `'Discord'`: Discord
 - `'Dribbble'`: Dribble
 - `'Evernote'`: Evernote
 - `'Facebook'`: Facebook
 - `'Flipboard'`: Flipboard
 - `'Github'`: ~~ Gayhub ~~ Github
+- `'Gitlab'`: Gitlab
 - `'Gmail'`: Google mailbox (of course you can also fill in your own other mailbox)
 - `'Instagram'`: Instagram
 - `'Line'`: Line
@@ -232,9 +241,9 @@ The optional values of `MediaType` are as follows:
 - `'Pocket'`: Pocket
 - `'QQ'`: QQ
 - `'Qzone'`: Qzone
+- `'Reddit'`: Reddit
 - `'Rss'`: RSS address
 - `'Steam'`: Steam
-- `'Taobao'`: Taobao
 - `'Twitter'`: Twitter
 - `'Wechat'`: WeChat
 - `'Weibo'`: Weibo
@@ -251,7 +260,7 @@ The optional values of `MediaType` are as follows:
 
 Whether the current page displays search box.
 
-### backtotop
+### backToTop
 
 - Type: `boolean`
 - Default value: Globally configured value (global default is `true`)

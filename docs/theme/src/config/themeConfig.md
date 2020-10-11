@@ -1,12 +1,11 @@
 ---
+title: 主题配置
 icon: configuration
 category: config
 tags:
   - config
   - themeConfig
 ---
-
-# 主题配置
 
 除了查看本指南，你也可以直接查看源代码中的 [types 文件](https://github.com/Mister-Hope/vuepress-theme-hope/blob/master/packages/theme/types/hopeConfig.d.ts) 或本文档的 [配置文件](https://github.com/Mister-Hope/vuepress-theme-hope/blob/master/docs/theme/src/.vuepress/config.js)。
 
@@ -110,6 +109,13 @@ SideBarItem 新增
 - 默认值: `true`
 
 是否启用默认的搜索框
+
+### searchPlaceholder
+
+- 类型: `string`
+- 必填: 否
+
+搜索框的占位符文字
 
 ### searchMaxSuggestions
 
@@ -443,7 +449,7 @@ workbox-build 的 [generateSW 配置](https://developers.google.com/web/tools/wo
 
 ## 评论设置
 
-具体配配置请见　[@mr-hope/vuepress-plugin-comment 文档](http://comment.mrhope.site/config/)
+具体配配置请见　[@mr-hope/vuepress-plugin-comment 文档](https://vuepress-comment.mrhope.site/config/)
 
 可以直接设置为 `false` 来禁用评论功能
 
@@ -537,6 +543,13 @@ workbox-build 的 [generateSW 配置](https://developers.google.com/web/tools/wo
 ```
 
 :::
+
+## addthis
+
+- 类型: `string`
+- 必填: 否
+
+AddThis 的 pubid
 
 ## 其他配置选项
 

@@ -1,12 +1,11 @@
 ---
+title: 页面配置
 icon: configuration
 category: config
 tags:
   - config
   - frontmatter
 ---
-
-# 页面配置
 
 页面的 Front Matter 新增如下配置选项：
 
@@ -43,6 +42,13 @@ tags:
 ::: tip
 当全局默认作者启用时，可以设置 `false` 取消作者显示
 :::
+
+### original
+
+- 类型: `boolean`
+- 默认: `false`
+
+当前文章是否为原创。
 
 ### time
 
@@ -227,12 +233,15 @@ tags:
 `MediaType` 的可选值如下:
 
 - `'Baidu'`: 百度
+- `'Bitbucket'`: Bitbucket
 - `'Dingding'`: 钉钉
+- `'Discord'`: Discord
 - `'Dribbble'`: Dribble
 - `'Evernote'`: 印象笔记
 - `'Facebook'`: 脸书
 - `'Flipboard'`: 红板报
 - `'Github'`: ~~Gayhub~~ Github
+- `'Gitlab'`: Gitlab
 - `'Gmail'`: 谷歌邮箱(当然你也可以填入你自己的其他邮箱)
 - `'Instagram'`: Instagram
 - `'Line'`: Line
@@ -241,9 +250,9 @@ tags:
 - `'Pocket'`: Pocket
 - `'QQ'`: QQ
 - `'Qzone'`: QQ 空间
+- `'Reddit'`: Reddit
 - `'Rss'`: RSS 地址
 - `'Steam'`: Steam
-- `'Taobao'`: 淘宝
 - `'Twitter'`: Twitter
 - `'Wechat'`: 微信
 - `'Weibo'`: 微博
@@ -260,7 +269,7 @@ tags:
 
 当前页面是否显示搜索框。
 
-### backtotop
+### backToTop
 
 - 类型: `boolean`
 - 默认值: 全局中配置的值 (全局默认为 `true`)

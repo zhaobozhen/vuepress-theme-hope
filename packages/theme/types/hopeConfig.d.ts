@@ -17,23 +17,26 @@ import { SitemapOptions } from "@mr-hope/vuepress-plugin-sitemap";
  */
 type BlogMedia =
   | "Baidu"
+  | "Bitbucket"
   | "Dingding"
+  | "Discord"
   | "Dribbble"
   | "Evernote"
   | "Facebook"
   | "Flipboard"
   | "Github"
+  | "Gitlab"
   | "Gmail"
   | "Instagram"
-  | "Line"
+  | "Lines"
   | "Linkedin"
   | "Pinterest"
   | "Pocket"
   | "QQ"
   | "Qzone"
+  | "Reddit"
   | "Rss"
   | "Steam"
-  | "Taobao"
   | "Twitter"
   | "Wechat"
   | "Weibo"
@@ -347,6 +350,12 @@ export interface HopeThemeConfig extends DefaultThemeConfig {
    * PWA configuration
    */
   pwa?: PWAOptions | false;
+  /**
+   * 是否在桌面模式显示锚点标题
+   *
+   * Whether display anchor in desktop mode
+   */
+  anchorDisplay?: boolean;
   /** 页面信息 */
   pageInfo?: PageInfotype[] | false;
   /**
@@ -391,12 +400,26 @@ export interface HopeThemeConfig extends DefaultThemeConfig {
   /** Sitemap */
   sitemap?: SitemapOptions | false;
   /**
+   * AddThis 的公共 ID
+   *
+   * pubid for addthis
+   */
+  addthis?: string;
+  /**
+   * 是否启用代码复制按钮
+   *
+   * Whether enable code copy feature
+   *
+   * @default true
+   */
+  copyCode?: boolean;
+  /**
    * ts-loader 选项
    *
    * Options which will passed to ts-loader
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  tsLoader?: Record<string, any>;
+  typescript?: boolean | Record<string, any>;
   /** 图标前缀 */
   iconPrefix?: string;
   /** 是否在侧边栏显示图标 */

@@ -1,6 +1,8 @@
 <template>
-  <div class="password" :class=" { expand: page || isMainPage }">
-    <div class="text" :class="{ hasTried }">{{ hasTried? '请输入正确密码': '请输入密码' }}</div>
+  <div class="password" :class="{ expand: page || isMainPage }">
+    <div class="text" :class="{ hasTried }">
+      {{ hasTried ? "请输入正确密码" : "请输入密码" }}
+    </div>
     <div class="input-wrapper">
       <input v-model="password" type="password" @keypress.enter="verify" />
       <div class="button" @click="verify">OK</div>
@@ -8,33 +10,7 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { Component, Prop, Vue } from "vue-property-decorator";
-import md5 = require("md5");
-
-@Component
-export default class Password extends Vue {
-  @Prop({ type: Boolean, default: false })
-  private readonly page!: boolean;
-
-  private password = "";
-
-  private hasTried = false;
-
-  private get isMainPage() {
-    return this.$frontmatter.home === true;
-  }
-
-  private verify() {
-    this.hasTried = false;
-    this.$emit("enter", md5(this.password));
-
-    Vue.nextTick().then(() => {
-      this.hasTried = true;
-    });
-  }
-}
-</script>
+<script src="./Password" />
 
 <style lang="stylus">
 .password
@@ -48,10 +24,10 @@ export default class Password extends Vue {
   justify-content center
   align-items center
 
-  @media (max-width: $MQNarrow)
+  @media (max-width $MQNarrow)
     padding-left $mobileSidebarWidth
 
-  @media (max-width: $MQMobile)
+  @media (max-width $MQMobile)
     padding-left 0
 
   &.expand
@@ -92,6 +68,7 @@ export default class Password extends Vue {
       flex 1
       line-height 2
       letter-spacing 0.5em
+      outline none
 
     .button
       width 60px

@@ -1,6 +1,6 @@
 {
   "name": "@mr-hope/vuepress-plugin-components",
-  "version": "0.6.7",
+  "version": "0.8.0",
   "description": "components plugin for vuepress-theme-hope",
   "keywords": [
     "vuepress-plugin",
@@ -24,18 +24,14 @@
     "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "dependencies": {
-    "@mr-hope/vuepress-shared-utils": "^0.6.7",
-    "@mr-hope/vuepress-types": "^0.6.7",
+    "@mr-hope/vuepress-shared-utils": "^0.8.0",
+    "@mr-hope/vuepress-types": "^0.8.0",
     "@types/lodash.debounce": "^4.0.6",
     "lodash.debounce": "^4.0.8",
     "screenfull": "5.0.2",
-    "vue-router": "^3.3.2",
-    "vuepress-plugin-typescript": "^0.3.0"
-  },
-  "peerDependencies": {
-    "typescript": "^3.9.5"
+    "vue-router": "^3.4.5"
   },
   "publishConfig": {
     "access": "public"

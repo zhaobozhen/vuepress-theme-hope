@@ -1,12 +1,11 @@
 ---
+title: Theme Config
 icon: configuration
 category: config
 tags:
   - config
   - themeConfig
 ---
-
-# Theme Config
 
 In addition to viewing this guide, you can also directly view the [types file](https://github.com/Mister-Hope/vuepress-theme-hope/blob/master/packages/theme/types/hopeConfig.d.ts) in the source code or [configuration file](https://github.com/Mister-Hope/vuepress-theme-hope/blob/master/docs/theme/src/.vuepress/config.js) of this document.
 
@@ -104,6 +103,13 @@ Whether to automatically update hash values ​​in URLs and sidebar active hea
 - Default: `true`
 
 Whether to enable the default search box
+
+### searchPlaceholder
+
+- Type: `string`
+- Required: No
+
+Placeholder for the search box
 
 ### searchMaxSuggestions
 
@@ -431,7 +437,7 @@ Whether to enable flowchart syntax support
 
 ## Comment settings
 
-For specific configuration, see [@mr-hope/vuepress-plugin-comment documentation](http://comment.mrhope.site/en/config/)
+For specific configuration, see [@mr-hope/vuepress-plugin-comment documentation](https://vuepress-comment.mrhope.site/en/config/)
 
 You can set it to `false` directly to disable the comment function
 
@@ -525,6 +531,13 @@ The encryption configuration is an object with a key name matching the path and 
 ```
 
 :::
+
+## addthis
+
+- Type: `string`
+- Required: 否
+
+pubid for AddThis
 
 ## Other configuration options
 

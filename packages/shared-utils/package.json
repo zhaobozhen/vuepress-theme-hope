@@ -1,6 +1,6 @@
 {
   "name": "@mr-hope/vuepress-shared-utils",
-  "version": "0.6.7",
+  "version": "0.8.0",
   "description": "Shared utils for vuepress-theme-hope",
   "keywords": [
     "vuepress-theme-hope",
@@ -22,10 +22,10 @@
     "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register test/unit/*.ts"
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} mocha test/unit/*.ts"
   },
   "publishConfig": {
     "access": "public"

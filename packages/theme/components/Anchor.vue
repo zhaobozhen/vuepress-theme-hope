@@ -1,133 +1,4 @@
-<script lang='ts'>
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { ComponentOptions, CreateElement, VNode } from "vue";
-import {
-  SidebarGroupItem,
-  SidebarHeader,
-  SidebarHeaderItem,
-  groupSidebarHeaders,
-} from "../util/sidebar";
-import { hashRE, isActive } from "../util/path";
-import { HopeSideBarConfigItemObject } from "@mr-hope/vuepress-shared-utils";
-import { PageHeader } from "@mr-hope/vuepress-types";
-import { Route } from "vue-router";
-
-interface RenderLinkOption {
-  /** 链接地址 */
-  link: string;
-  /** 链接文字 */
-  text: string;
-  /** 是否激活 */
-  active: boolean;
-}
-
-/** 渲染链接 */
-const renderLink = (
-  h: CreateElement,
-  { text, link, active }: RenderLinkOption
-) =>
-  h(
-    "router-link",
-    {
-      props: {
-        to: link,
-        activeClass: "",
-        exactActiveClass: "",
-      },
-      class: {
-        active,
-        "anchor-link": true,
-      },
-    },
-    [h("div", {}, [text])]
-  );
-
-interface RenderChildrenOptions {
-  /** 子项 */
-  children: SidebarHeader[] | false;
-  /** 配置项路径 */
-  path: string;
-  /** 当前路由对象 */
-  route: Route;
-  /** 当前深度 */
-  depth?: number;
-  /** 所允许的最大深度 */
-  maxDepth: number;
-}
-
-/** 渲染子项 */
-const renderChildren = (
-  h: CreateElement,
-  { children, path, route, maxDepth, depth = 2 }: RenderChildrenOptions
-): VNode | null => {
-  if (!children || depth > maxDepth) return null;
-
-  return h(
-    "ul",
-    { class: "anchor-list" },
-    children.map((child: SidebarHeader) => {
-      const active = isActive(route, `${path}#${child.slug}`);
-
-      return h("li", { class: ["anchor", `anchor${depth}`] }, [
-        renderLink(h, {
-          text: child.title,
-          link: `${path}#${child.slug}`,
-          active,
-        }),
-        renderChildren(h, {
-          children: child.children || false,
-          path,
-          route,
-          maxDepth,
-          depth: depth + 1,
-        }),
-      ]);
-    })
-  );
-};
-
-// Functional Component Hack
-interface FunctionalComponentOptions extends ComponentOptions<Vue> {
-  functional?: boolean;
-}
-
-interface SidebarLinkProps {
-  header: SidebarHeaderItem[];
-}
-
-@Component({
-  functional: true,
-  render(
-    h,
-    { parent: { $page, $route, $themeConfig, $themeLocaleConfig }, props }
-  ) {
-    /** 当前渲染项目配置 */
-    const { header } = props as SidebarLinkProps;
-    /** 最大显示深度 */
-    const maxDepth =
-      ($page.frontmatter.sidebarDepth ||
-        $themeLocaleConfig.sidebarDepth ||
-        $themeConfig.sidebarDepth ||
-        2) + 1;
-    const children = groupSidebarHeaders(header);
-
-    return h("aside", { attrs: { id: "anchor" } }, [
-      h("div", { class: "anchor-wrapper" }, [
-        renderChildren(h, {
-          children,
-          path: $route.path,
-          route: $route,
-          maxDepth,
-        }),
-      ]),
-    ]);
-  },
-} as FunctionalComponentOptions)
-export default class Anchor extends Vue {
-  @Prop({ type: Array, default: () => [] })
-  private readonly header!: SidebarHeader[];
-}
-</script>
+<script src="./Anchor" />
 
 <style lang="stylus">
 $headings = 2 3 4 5 6
@@ -142,7 +13,7 @@ $headings = 2 3 4 5 6
   max-height 80vh
   overflow-y scroll
 
-  @media (min-width: $MQWide)
+  @media (min-width $MQWide)
     .has-anchor &
       display block
 
@@ -156,9 +27,9 @@ $headings = 2 3 4 5 6
     &::after
       content ' '
       position absolute
-      top 16px
+      top 15px
       left 4px
-      bottom 14px
+      bottom 15px
       z-index -1
       margin-left -2px
       width 4px
@@ -171,6 +42,7 @@ $headings = 2 3 4 5 6
       padding-left 0
 
       .anchor
+        line-height 1.5
         box-sizing border-box
         list-style none
         padding 0px 8px
@@ -182,7 +54,6 @@ $headings = 2 3 4 5 6
           color var(--light-grey)
 
           > div
-            line-height 1
             text-overflow ellipsis
             white-space nowrap
             overflow hidden

@@ -3,26 +3,30 @@
     :class="[
       {
         collapsable: item.collapsable,
-        'is-sub-group': depth !== 0
+        'is-sub-group': depth !== 0,
       },
-      `depth-${depth}`
+      `depth-${depth}`,
     ]"
     class="sidebar-group"
   >
-    <router-link
+    <RouterLink
       v-if="item.path"
       :class="{
         open,
-        'active': isActive($route, item.path)
+        active: isActive($route, item.path),
       }"
       class="sidebar-heading clickable"
       :to="item.path"
-      @click.native="$emit('toggle')"
+      @click="$emit('toggle')"
     >
       <i v-if="item.icon" :class="`iconfont ${getIcon(item.icon)}`" />
       <span>{{ item.title }}</span>
-      <span v-if="item.collapsable" :class="open ? 'down' : 'right'" class="arrow" />
-    </router-link>
+      <span
+        v-if="item.collapsable"
+        :class="open ? 'down' : 'right'"
+        class="arrow"
+      />
+    </RouterLink>
 
     <p
       v-else
@@ -32,14 +36,17 @@
     >
       <i v-if="item.icon" :class="`iconfont ${getIcon(item.icon)}`" />
       <span>{{ item.title }}</span>
-      <span v-if="item.collapsable" :class="open ? 'down' : 'right'" class="arrow" />
+      <span
+        v-if="item.collapsable"
+        :class="open ? 'down' : 'right'"
+        class="arrow"
+      />
     </p>
 
     <DropdownTransition>
       <SidebarLinks
         v-if="open || !item.collapsable"
         class="sidebar-group-items"
-        :sidebar-depth="item.sidebarDepth"
         :depth="depth + 1"
         :items="item.children"
       />
@@ -47,38 +54,7 @@
   </section>
 </template>
 
-<script lang='ts'>
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { SidebarAutoItem, SidebarGroupItem } from "../util/sidebar";
-import DropdownTransition from "@theme/components/DropdownTransition.vue";
-import { isActive } from "../util/path";
-
-@Component({ components: { DropdownTransition } })
-export default class SidebarGroup extends Vue {
-  @Prop({ type: Object, default: () => ({}) })
-  private readonly item!: SidebarAutoItem | SidebarGroupItem;
-
-  @Prop(Boolean)
-  private readonly open!: boolean;
-
-  @Prop(Number)
-  private readonly depth!: number;
-
-  private isActive = isActive;
-
-  private getIcon(icon: string | undefined) {
-    const { iconPrefix } = this.$themeConfig;
-
-    return this.$themeConfig.sidebarIcon !== false && icon
-      ? `${iconPrefix === "" ? "" : iconPrefix || "icon-"}${icon}`
-      : "";
-  }
-
-  private beforeCreate() {
-    this.$options.components!.SidebarLinks = require("@theme/components/SidebarLinks.vue").default;
-  }
-}
-</script>
+<script src="./SidebarGroup" />
 
 <style lang="stylus">
 .sidebar-group

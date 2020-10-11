@@ -1,6 +1,6 @@
 {
   "name": "@mr-hope/vuepress-plugin-reading-time",
-  "version": "0.6.7",
+  "version": "0.8.0",
   "description": "Reading time plugin for vuepress-theme-hope",
   "keywords": [
     "vuepress-plugin",
@@ -24,13 +24,13 @@
     "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register test/*.test.ts"
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} mocha test/*.test.ts"
   },
   "devDependencies": {
-    "@mr-hope/vuepress-types": "^0.6.7"
+    "@mr-hope/vuepress-types": "^0.8.0"
   },
   "publishConfig": {
     "access": "public"

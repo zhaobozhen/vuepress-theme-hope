@@ -82,6 +82,14 @@ const pluginConfig = (themeConfig: ResolvedHopeThemeConfig): PluginConfig[] => {
       },
     ],
 
+    /** add this 支持 */
+    [
+      "add-this",
+      typeof themeConfig.addthis === "string"
+        ? { pubid: themeConfig.addthis }
+        : false,
+    ],
+
     /** 使 VuePress 站点支持简洁链接 */
     ["clean-urls", { normalSuffix: "/" }],
 
@@ -120,17 +128,7 @@ const pluginConfig = (themeConfig: ResolvedHopeThemeConfig): PluginConfig[] => {
     ],
 
     /** 复制按钮插件 */
-    [
-      "one-click-copy",
-      {
-        copySelector: [
-          'div[class*="language-"] pre',
-          'div[class*="aside-code"] aside',
-        ],
-        copyMessage: "Copy successfully",
-        duration: 500,
-      },
-    ],
+    ["@mr-hope/copy-code", themeConfig.copyCode !== false],
 
     /** Photo-swipe 插件 */
     ["photo-swipe", themeConfig.photoSwipe],
@@ -139,7 +137,17 @@ const pluginConfig = (themeConfig: ResolvedHopeThemeConfig): PluginConfig[] => {
     ["smooth-scroll", themeConfig.smoothScroll],
 
     /** typescript 支持 */
-    ["typescript", { tsLoaderOptions: themeConfig.tsLoader || {} }],
+    [
+      "typescript",
+      themeConfig.typescript
+        ? {
+            tsLoaderOptions:
+              typeof themeConfig.typescript === "object"
+                ? themeConfig.typescript
+                : {},
+          }
+        : false,
+    ],
   ];
 };
 

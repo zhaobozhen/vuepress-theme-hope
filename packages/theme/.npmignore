@@ -1,4 +1,8 @@
 *.ts
 !*.d.ts
 
+!util/*.ts
+
 test/
+
+.mocharc.yml

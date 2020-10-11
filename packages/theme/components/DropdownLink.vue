@@ -62,50 +62,7 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import DropdownTransition from "@theme/components/DropdownTransition.vue";
-import { NavBarConfigItem } from "../util/navbar";
-import NavLink from "@theme/components/NavLink.vue";
-
-@Component({ components: { NavLink, DropdownTransition } })
-export default class DropdownLink extends Vue {
-  @Prop({ type: Object, required: true })
-  private readonly item!: NavBarConfigItem;
-
-  private open = false;
-
-  private get dropdownAriaLabel() {
-    return this.item.ariaLabel || this.item.text;
-  }
-
-  private get iconPrefix() {
-    const { iconPrefix } = this.$themeConfig;
-
-    return iconPrefix === "" ? "" : iconPrefix || "icon-";
-  }
-
-  private setOpen(value: boolean) {
-    this.open = value;
-  }
-
-  handleDropdown(event: any) {
-    const isTriggerByTab = event.detail === 0;
-    if (isTriggerByTab) this.setOpen(!this.open);
-  }
-
-  private isLastItemOfArray(item: NavBarConfigItem, array: NavBarConfigItem[]) {
-    if (Array.isArray(array)) return item === array[array.length - 1];
-
-    return false;
-  }
-
-  @Watch("$route")
-  onRouteChange() {
-    this.open = false;
-  }
-}
-</script>
+<script src="./DropdownLink" />
 
 <style lang="stylus">
 .dropdown-wrapper
@@ -193,7 +150,7 @@ export default class DropdownLink extends Vue {
         padding-top 0
         border-top 0
 
-@media (max-width: $MQMobile)
+@media (max-width $MQMobile)
   .dropdown-wrapper
     &.open .dropdown-title
       margin-bottom 0.5rem
@@ -228,7 +185,7 @@ export default class DropdownLink extends Vue {
           font-size 14px
           padding-left 1rem
 
-@media (min-width: $MQMobile)
+@media (min-width $MQMobile)
   .dropdown-wrapper
     height 1.8rem
 

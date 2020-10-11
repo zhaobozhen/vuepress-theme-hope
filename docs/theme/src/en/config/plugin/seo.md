@@ -1,13 +1,14 @@
 ---
+title: "@mr-hope/seo"
 category: config
 tags:
   - plugin
   - config
 ---
 
-# @mr-hope/seo
+Inject `<meta>` into your webpage to enhance the SEO of your webpage.
 
-The plugin will inject `<meta>` into your webpage to enhance the SEO of your webpage.
+<!-- more -->
 
 ## Plugin options
 
@@ -42,7 +43,7 @@ interface PageSeoInfo {
 }
 ```
 
-You can use this option to inject new or overwrite the default generated SEO, you need to return an object in the format of `<property>: <conent>`.
+You can use this option to inject new or overwrite the default generated SEO, you need to return an object in the format of `<property>: <content>`.
 
 For example, if you return `{ 'og:url': 'google.com', 'og:image': 'google.com/logo.jpg' }`, the plugin will inject the following into `<head>` :
 

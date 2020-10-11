@@ -41,6 +41,8 @@ Available presets:
 
 ## Demo
 
+<!-- markdownlint-disable -->
+
 @flowstart
 st=>start: Start|past:>http://www.google.com[blank]
 e=>end: End|future:>http://www.google.com
@@ -58,6 +60,8 @@ cond(no)->sub1(left)->op1
 c2(yes)->io->e
 c2(no)->op2->e
 @flowend
+
+<!-- markdownlint-restore -->
 
 ```md
 @flowstart
@@ -81,4 +85,4 @@ c2(no)->op2->e
 
 ## Flowchart Introduction
 
-See [Flowchart Introduction](https://vuepress-md-enhance.mrhope.site/en/guide/flowchart.html#flowchart-intro).
+See [Flowchart Introduction](https://vuepress-md-enhance.mrhope.site/en/guide/flowchart/#flowchart-intro).

@@ -1,9 +1,14 @@
 ---
 title: Markdown DEMO
 icon: markdown
+category: basic
 ---
 
+<!-- markdownlint-disable -->
+
 # First Heading
+
+<!-- markdownlint-restore -->
 
 ```md
 # First Heading

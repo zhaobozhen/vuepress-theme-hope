@@ -1,72 +1,18 @@
 <template>
-  <form id="search-form" class="algolia-search-wrapper search-box" role="search">
-    <input id="algolia-search-input" class="search-query" :placeholder="placeholder" />
+  <form
+    id="search-form"
+    class="algolia-search-wrapper search-box"
+    role="search"
+  >
+    <input
+      id="algolia-search-input"
+      class="search-query"
+      :placeholder="placeholder"
+    />
   </form>
 </template>
 
-<script lang='ts'>
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { AlgoliaOption } from "@mr-hope/vuepress-types";
-
-@Component
-export default class AlgoliaSearchBox extends Vue {
-  @Prop({ type: Object, required: true }) options!: AlgoliaOption;
-
-  private placeholder: string = "";
-
-  @Watch("$lang")
-  onLangChange(newValue: string) {
-    this.update(this.options, newValue);
-  }
-
-  @Watch("options")
-  onOptionsChange(newValue: AlgoliaOption) {
-    this.update(newValue, this.$lang);
-  }
-
-  private mounted() {
-    this.initialize(this.options, this.$lang);
-    this.placeholder = this.$site.themeConfig.searchPlaceholder || "";
-  }
-
-  initialize(userOptions: AlgoliaOption, lang: string) {
-    Promise.all([
-      import(
-        /* webpackChunkName: "docsearch" */ "docsearch.js/dist/cdn/docsearch.min.js"
-      ),
-      import(
-        /* webpackChunkName: "docsearch" */ "docsearch.js/dist/cdn/docsearch.min.css"
-      ),
-    ]).then(([docsearch]) => {
-      (docsearch as any)({
-        ...userOptions,
-        inputSelector: "#algolia-search-input",
-        // #697 Make docsearch work well at i18n mode.
-        algoliaOptions: {
-          facetFilters: [`lang:${lang}`].concat(
-            (userOptions as any).facetFilters || []
-          ),
-        },
-        handleSelected: (
-          _input: HTMLInputElement,
-          _event: Event,
-          suggestion: { url: string }
-        ) => {
-          const { pathname, hash } = new URL(suggestion.url);
-          const routepath = pathname.replace(this.$site.base, "/");
-          this.$router.push(`${routepath}${hash}`);
-        },
-      });
-    });
-  }
-
-  update(options: AlgoliaOption, lang: string) {
-    this.$el.innerHTML =
-      '<input id="algolia-search-input" class="search-query">';
-    this.initialize(options, lang);
-  }
-}
-</script>
+<script src="./AlgoliaSearchBox" />
 
 <style lang="stylus">
 .algolia-search-wrapper
@@ -86,7 +32,7 @@ export default class AlgoliaSearchBox extends Vue {
       font-size 16px
       text-align left
 
-      @media (max-width: $MQMobile)
+      @media (max-width $MQMobile)
         min-width calc(100vw - 4rem) !important
         max-width calc(100vw - 4rem) !important
 
@@ -126,7 +72,7 @@ export default class AlgoliaSearchBox extends Vue {
       .algolia-docsearch-suggestion--wrapper
         padding 0
 
-        @media (max-width: $MQMobile)
+        @media (max-width $MQMobile)
           padding 5px 7px 5px 5px !important
 
       .algolia-docsearch-suggestion--title
@@ -141,13 +87,13 @@ export default class AlgoliaSearchBox extends Vue {
         background var(--background-color)
         color var(--text-color)
 
-        @media (min-width: $MQMobile)
+        @media (min-width $MQMobile)
           display table-cell
           float none
           width 150px
           min-width 150px
 
-        @media (max-width: $MQMobile)
+        @media (max-width $MQMobile)
           padding 0 !important
           background white !important
 
@@ -158,7 +104,7 @@ export default class AlgoliaSearchBox extends Vue {
         color #555
 
         &:after
-          @media (max-width: $MQMobile)
+          @media (max-width $MQMobile)
             display inline-block
             vertical-align middle
             content ' > '
@@ -168,7 +114,7 @@ export default class AlgoliaSearchBox extends Vue {
             line-height 14.4px
 
       .algolia-docsearch-suggestion--content
-        @media (min-width: $MQMobile)
+        @media (min-width $MQMobile)
           display table-cell
           float none
           vertical-align top

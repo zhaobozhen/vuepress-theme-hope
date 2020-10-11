@@ -2,7 +2,7 @@
   <div v-if="canFullscreen" class="fullscreen-wrapper">
     <span class="icon" role="button" @click="click">
       <svg
-        :class="isFullscreen? 'cacelFullScreen': 'fullScreen'"
+        :class="isFullscreen ? 'cacelFullScreen' : 'fullScreen'"
         viewBox="0 0 1024 1024"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -44,29 +44,7 @@
   </div>
 </template>
 
-<script lang='ts'>
-import { Component, Prop, Vue } from "vue-property-decorator";
-import screenfull = require("screenfull");
-
-@Component
-export default class ScreenFull extends Vue {
-  private canFullscreen = false;
-
-  private isFullscreen = false;
-
-  private click() {
-    if (screenfull.isEnabled)
-      screenfull.toggle().then(() => {
-        this.isFullscreen = (screenfull as any).isFullscreen;
-      });
-  }
-
-  private mounted() {
-    this.canFullscreen =
-      screenfull.isEnabled && this.$themeConfig.fullscreen !== false;
-  }
-}
-</script>
+<script src="./ScreenFull" />
 
 <style lang="stylus">
 .fullscreen-wrapper

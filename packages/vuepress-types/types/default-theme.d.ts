@@ -10,6 +10,8 @@ export interface NavBarConfigItem {
   link?: string;
   /** 导航栏下拉列表子项 */
   items?: NavBarConfigItem[];
+  target?: string;
+  rel?: string | false;
 }
 
 /** 导航栏配置 */
@@ -70,6 +72,8 @@ export interface DefaultThemeConfig {
   logo?: string;
   /** 导航栏链接 */
   nav?: NavBarConfig;
+  /** 是否禁用导航栏 */
+  navbar?: boolean;
   /** 侧边栏配置 */
   sidebar?: SideBarConfig;
   /** 侧边栏嵌套的标题深度 */

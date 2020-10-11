@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES6"
+  },
+  "include": ["packages/*/test/**/*.ts", "packages/theme/util/*.ts"]
+}

@@ -1,6 +1,6 @@
 {
   "name": "@mr-hope/vuepress-plugin-comment",
-  "version": "0.6.7",
+  "version": "0.8.0",
   "description": "A simple Comment plugin",
   "keywords": [
     "vuepress-plugin",
@@ -25,7 +25,7 @@
     "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "types": "types/index.d.ts",
   "scripts": {
     "demo:build": "vuepress build test/demo",
@@ -33,9 +33,9 @@
     "demo:serve": "vuepress dev test/demo"
   },
   "dependencies": {
-    "@mr-hope/vuepress-plugin-reading-time": "^0.6.7",
-    "@mr-hope/vuepress-shared-utils": "^0.6.7",
-    "@mr-hope/vuepress-types": "^0.6.7",
+    "@mr-hope/vuepress-plugin-reading-time": "^0.8.0",
+    "@mr-hope/vuepress-shared-utils": "^0.8.0",
+    "@mr-hope/vuepress-types": "^0.8.0",
     "@vssue/api-bitbucket-v2": "^1.4.0",
     "@vssue/api-gitea-v1": "^1.4.4",
     "@vssue/api-gitee-v5": "^1.4.4",
@@ -43,13 +43,10 @@
     "@vssue/api-github-v4": "^1.4.0",
     "@vssue/api-gitlab-v4": "^1.4.0",
     "@vssue/vuepress-plugin-vssue": "^1.4.6",
+    "balloon-css": "^1.2.0",
     "leancloud-storage": "^4.6.1",
     "valine": "^1.4.14",
-    "vssue": "^1.4.6",
-    "vuepress-plugin-typescript": "^0.3.0"
-  },
-  "peerDependencies": {
-    "typescript": "^3.9.5"
+    "vssue": "^1.4.6"
   },
   "publishConfig": {
     "access": "public"

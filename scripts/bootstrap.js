@@ -18,7 +18,7 @@ files.forEach((pkgName) => {
       name: `@mr-hope/vuepress-plugin-${pkgName}`,
       version: baseVersion,
       description: desc,
-      main: "src/index.js",
+      main: "lib/index.js",
       types: "types/index.d.ts",
       publishConfig: {
         access: "public",
@@ -45,9 +45,8 @@ files.forEach((pkgName) => {
         url: "https://github.com/Mister-Hope/vuepress-theme-hope/issues",
       },
       homepage: `https://github.com/Mister-Hope/vuepress-theme-hope/packages/${pkgName}#readme`,
-      peerDependencies: {
-        "@mr-hope/vuepress-types": "^0.9.2",
-        typescript: "^3.9.3",
+      dependencies: {
+        "@mr-hope/vuepress-types": `^${baseVersion}`,
       },
     };
 

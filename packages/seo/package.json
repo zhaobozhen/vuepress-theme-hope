@@ -1,6 +1,6 @@
 {
   "name": "@mr-hope/vuepress-plugin-seo",
-  "version": "0.6.7",
+  "version": "0.8.0",
   "description": "seo plugin for vuepress-theme-hope",
   "keywords": [
     "vuepress-plugin",
@@ -24,10 +24,10 @@
     "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "types": "types/index.d.ts",
   "dependencies": {
-    "@mr-hope/vuepress-types": "^0.6.7"
+    "@mr-hope/vuepress-types": "^0.8.0"
   },
   "publishConfig": {
     "access": "public"

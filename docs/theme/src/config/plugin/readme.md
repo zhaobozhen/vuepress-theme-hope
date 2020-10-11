@@ -1,4 +1,5 @@
 ---
+title: 插件说明
 category: config
 copyright:
   minLength: 10
@@ -7,13 +8,13 @@ tags:
   - config
 ---
 
-# 插件说明
+vuepress-theme-hope 自带了很多 vuepress 插件。一些插件会自动启用，如果你不需要，可以在 themeConfig 中将其禁用；一些插件也只有你进行配置才会启用。
 
-vuepress-theme-hope 启用了很多 vuepress 插件，如果你不需要，可以在 themeConfig 中将其禁用。
+<!-- more -->
 
 ## 内建插件
 
-- [@mr-hope/vuepress-plugin-comment](https://vuepress-comment.mrhope.site/): 评论与文章信息功能
+- [@mr-hope/vuepress-plugin-comment](https://vuepress-comment.mrhope.site): 评论与文章信息功能
 
 - [@mr-hope/vuepress-plugin-component](../../guide/feature/component.md): 提供一些开箱即用的插件
 
@@ -27,7 +28,7 @@ vuepress-theme-hope 启用了很多 vuepress 插件，如果你不需要，可�
 
 - [@mr-hope/vuepress-plugin-sitemap](sitemap.md): 为你的站点生成 sitemap
 
-- [vuepress-plugin-md-enhance](https://vuepress-md-enhance.mrhope.site/): 提供更多 Markdown 语法
+- [vuepress-plugin-md-enhance](https://vuepress-md-enhance.mrhope.site): 提供更多 Markdown 语法
 
 - [vuepress-plugin-photo-swipe](photo-swipe.md): 使网站的图片支持点击缩放
 

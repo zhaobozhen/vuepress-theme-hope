@@ -1,6 +1,6 @@
 import { describe, it } from "mocha";
 import { expect } from "chai";
-import resolveConfig from "../../src/pluginConfig";
+import resolveConfig from "../../lib/pluginConfig";
 
 describe("Test pluginConfig generate", () => {
   it("Should use plugin options first", () => {
@@ -19,7 +19,17 @@ describe("Test pluginConfig generate", () => {
     pluginConfig.splice(4, 1);
 
     expect(pluginConfig).to.be.deep.equal([
-      ["typescript"],
+      [
+        "container",
+        {
+          type: "info",
+          defaultTitle: {
+            "/": "相关信息",
+            "/zh/": "相关信息",
+            "/en/": "Info",
+          },
+        },
+      ],
       [
         "container",
         {
@@ -76,7 +86,17 @@ describe("Test pluginConfig generate", () => {
     pluginConfig.splice(4, 1);
 
     expect(pluginConfig).to.be.deep.equal([
-      ["typescript"],
+      [
+        "container",
+        {
+          type: "info",
+          defaultTitle: {
+            "/": "Info",
+            "/zh/": "相关信息",
+            "/en/": "Info",
+          },
+        },
+      ],
       [
         "container",
         {
@@ -133,7 +153,17 @@ describe("Test pluginConfig generate", () => {
     pluginConfig.splice(4, 1);
 
     expect(pluginConfig).to.be.deep.equal([
-      ["typescript"],
+      [
+        "container",
+        {
+          type: "info",
+          defaultTitle: {
+            "/": "Info",
+            "/zh/": "相关信息",
+            "/en/": "Info",
+          },
+        },
+      ],
       [
         "container",
         {

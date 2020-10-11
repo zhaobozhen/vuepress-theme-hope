@@ -17,27 +17,7 @@
   </aside>
 </template>
 
-<script lang='ts'>
-import { Component, Prop, Vue } from "vue-property-decorator";
-import BloggerInfo from "@theme/components/BloggerInfo.vue";
-import NavLinks from "@theme/components/NavLinks.vue";
-import { SidebarItem } from "../util/sidebar";
-import SidebarLinks from "@theme/components/SidebarLinks.vue";
-
-@Component({ components: { BloggerInfo, SidebarLinks, NavLinks } })
-export default class Sidebar extends Vue {
-  @Prop({ type: Array, required: true })
-  private readonly items!: SidebarItem[];
-
-  private get blogConfig() {
-    return this.$themeConfig.blog || {};
-  }
-
-  private get sidebarDisplay() {
-    return this.blogConfig.sidebarDisplay || "none";
-  }
-}
-</script>
+<script src="./Sidebar" />
 
 <style lang="stylus">
 .sidebar
@@ -98,16 +78,16 @@ export default class Sidebar extends Vue {
       margin-top 0.75rem
 
   // narrow desktop / iPad
-  @media (max-width: $MQNarrow)
+  @media (max-width $MQNarrow)
     width $mobileSidebarWidth
     font-size 15px
 
-  @media (min-width: ($MQMobile + 1px))
+  @media (min-width ($MQMobile + 1px))
     .theme-container.no-sidebar &
       display none
 
   // wide mobile
-  @media (max-width: $MQMobile)
+  @media (max-width $MQMobile)
     transform translateX(-100%)
     transition transform 0.2s ease
     box-shadow none

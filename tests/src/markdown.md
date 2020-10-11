@@ -7,6 +7,48 @@ tags: markdown
 
 # Markdown 增强
 
+## 自定义容器
+
+::: info
+信息容器。
+:::
+
+::: tip
+提示容器
+:::
+
+::: warning
+警告容器
+:::
+
+::: danger
+危险容器
+:::
+
+::: details
+详情容器
+:::
+
+::: info 自定义标题
+信息容器
+:::
+
+::: tip 自定义标题
+提示容器
+:::
+
+::: warning 自定义标题
+警告容器
+:::
+
+::: danger 自定义标题
+危险容器
+:::
+
+::: details 自定义标题
+详情容器
+:::
+
 ## 上下角标
 
 - 19^th^
@@ -44,14 +86,15 @@ Duplicated footnote reference[^second].
 
 ## 流程图展示
 
+<!-- markdownlint-disable -->
 @flowstart
-st=>start: Start|past:><http://www.google.com[blank]>
-e=>end: End|future:><http://www.google.com>
+st=>start: Start|past:>http://www.google.com[blank]
+e=>end: End|future:>http://www.google.com
 op1=>operation: My Operation|past
 op2=>operation: Stuff|current
 sub1=>subroutine: My Subroutine|invalid
 cond=>condition: Yes
-or No?|approved:><http://www.google.com>
+or No?|approved:>http://www.google.com
 c2=>condition: Good idea|rejected
 io=>inputoutput: catch something...|future
 
@@ -61,6 +104,7 @@ cond(no)->sub1(left)->op1
 c2(yes)->io->e
 c2(no)->op2->e
 @flowend
+<!-- markdownlint-restore -->
 
 ## 公式展示
 
