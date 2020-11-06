@@ -1,6 +1,7 @@
 import { Langs } from "@mr-hope/vuepress-shared-utils";
 import { RevealOptions } from "reveal.js";
 import "./declare";
+import "./reveal-plugins";
 
 export type RevealPlugin =
   | "highlight"
