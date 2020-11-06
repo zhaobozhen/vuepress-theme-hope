@@ -106,9 +106,10 @@ Acceptable values are:
 - `"search"`
 - `"notes"`
 - `"zoom"`
-- `"anything"`
+
+<!-- - `"anything"`
 - `"audio"`
-- `"chalkboard"`
+- `"chalkboard"` -->
 
 #### mdEnhance.presentation.revealConfig
 

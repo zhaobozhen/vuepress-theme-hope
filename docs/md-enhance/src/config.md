@@ -98,9 +98,10 @@ Acceptable values are:
 - `"search"`
 - `"notes"`
 - `"zoom"`
-- `"anything"`
+
+<!-- - `"anything"`
 - `"audio"`
-- `"chalkboard"`
+- `"chalkboard"` -->
 
 ### presentation.revealConfig
 

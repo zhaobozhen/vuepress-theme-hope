@@ -98,9 +98,10 @@ icon: configuration
 - `"search"`
 - `"notes"`
 - `"zoom"`
-- `"anything"`
+
+<!-- - `"anything"`
 - `"audio"`
-- `"chalkboard"`
+- `"chalkboard"` -->
 
 ### presentation.revealConfig
 

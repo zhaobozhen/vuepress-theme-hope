@@ -106,9 +106,10 @@ Markdown 功能增强，详情请见 [vuepress-plugin-md-enhance 文档][md-enha
 - `"search"`
 - `"notes"`
 - `"zoom"`
-- `"anything"`
+
+<!-- - `"anything"`
 - `"audio"`
-- `"chalkboard"`
+- `"chalkboard"` -->
 
 #### mdEnhance.presentation.revealConfig
 
