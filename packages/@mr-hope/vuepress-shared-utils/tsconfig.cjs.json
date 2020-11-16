@@ -1,0 +1,13 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./lib"
+  },
+  "include": [
+    "./src/i18n/plugin.ts",
+    "./src/i18n/config.json",
+    "./src/assignReverse.ts"
+  ]
+}

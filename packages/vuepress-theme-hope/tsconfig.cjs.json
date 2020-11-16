@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "rootDir": "./",
+    "outDir": "./",
+    "paths": {
+      "@theme/*": ["*"]
+    }
+  },
+  "include": ["./node/**/*.ts", "./index.ts"],
+  "exclude": []
+}

@@ -1,14 +1,36 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "importHelpers": true,
-    "module": "ESNext",
-    "target": "ESNext"
+    "importHelpers": true
   },
-  "include": ["packages/**/*.ts"],
-  "exclude": [
-    "packages/**/lib/**/*.ts",
-    "packages/*/test/**/*.ts",
-    "packages/theme/index.ts"
-  ]
+  "references": [
+    {
+      "path": "./packages/@mr-hope/vuepress-plugin-comment/tsconfig.build.json"
+    },
+    {
+      "path": "./packages/@mr-hope/vuepress-plugin-components/tsconfig.build.json"
+    },
+    {
+      "path": "./packages/@mr-hope/vuepress-plugin-copy-code/tsconfig.build.json"
+    },
+    {
+      "path": "./packages/@mr-hope/vuepress-plugin-last-update/tsconfig.build.json"
+    },
+    { "path": "./packages/@mr-hope/vuepress-plugin-pwa/tsconfig.build.json" },
+    {
+      "path": "./packages/@mr-hope/vuepress-plugin-reading-time/tsconfig.build.json"
+    },
+    { "path": "./packages/@mr-hope/vuepress-plugin-seo/tsconfig.build.json" },
+    {
+      "path": "./packages/@mr-hope/vuepress-plugin-sitemap/tsconfig.build.json"
+    },
+    { "path": "./packages/@mr-hope/vuepress-shared-utils/tsconfig.build.json" },
+    { "path": "./packages/@mr-hope/vuepress-theme-types/tsconfig.build.json" },
+    { "path": "./packages/@mr-hope/vuepress-types/tsconfig.build.json" },
+    { "path": "./packages/vuepress-plugin-add-this/tsconfig.build.json" },
+    { "path": "./packages/vuepress-plugin-md-enhance/tsconfig.build.json" },
+    { "path": "./packages/vuepress-plugin-photo-swipe/tsconfig.build.json" },
+    { "path": "./packages/vuepress-theme-hope/tsconfig.build.json" }
+  ],
+  "files": []
 }

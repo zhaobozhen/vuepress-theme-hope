@@ -1,0 +1,10 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ES2015",
+    "rootDir": "./src",
+    "outDir": "./lib"
+  },
+  "include": ["./src", "./src/i18n/config.json"],
+  "exclude": ["./src/i18n/plugin.ts"]
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./lib"
+  },
+  "files": [
+    "./src/index.ts",
+    "./src/genManifest.ts",
+    "./src/genServiceWorker.ts",
+    "./src/head.ts"
+  ]
+}

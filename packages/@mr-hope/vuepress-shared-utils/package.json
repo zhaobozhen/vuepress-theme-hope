@@ -1,0 +1,34 @@
+{
+  "name": "@mr-hope/vuepress-shared-utils",
+  "version": "1.5.7",
+  "description": "Shared utils for vuepress-theme-hope",
+  "keywords": [
+    "vuepress-theme-hope",
+    "vuepress",
+    "mr-hope"
+  ],
+  "homepage": "https://github.com/Mister-Hope/vuepress-theme-hope/tree/master/packages/shared-utils#readme",
+  "bugs": {
+    "url": "https://github.com/Mister-Hope/vuepress-theme-hope/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Mister-Hope/vuepress-theme-hope.git",
+    "directory": "packages/shared-utils"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Mr.Hope",
+    "email": "zhangbowang1998@gmail.com",
+    "url": "https://mrhope.site"
+  },
+  "main": "lib/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} mocha test/unit/*.ts"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ES2020",
+    "rootDir": "./",
+    "outDir": "./",
+    "paths": {
+      "@theme/*": ["*"]
+    }
+  },
+  "include": ["./"],
+  "exclude": ["./node", "./index.ts", "./tests", "./node_modules"]
+}

@@ -4,12 +4,15 @@
 packages/**/*.js
 packages/**/*.d.ts
 
+packages/**/lib/**
+
 !packages/**/types/**/*.d.ts
 
-!packages/pwa/lib/skip-waiting.js
-!packages/theme/lib/noopModule.js
+!packages/@mr-hope/vuepress-plugin-pwa/lib/skip-waiting.js
+!packages/vuepress-theme-hope/node/noopModule.js
 
-!packages/**/test/**/*.js
+!packages/**/tests/**/*.js
 
 .vscode/
 *.map
+*.tsbuildinfo

@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./lib"
+  },
+  "include": [
+    "./src/markdown-it/**/*.ts",
+    "./src/index.ts",
+    "./src/pluginConfig.ts"
+  ],
+  "exclude": []
+}

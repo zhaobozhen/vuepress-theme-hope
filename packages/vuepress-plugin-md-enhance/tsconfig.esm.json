@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ES2020",
+    "rootDir": "./src",
+    "outDir": "./lib"
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": [
+    "./src/markdown-it/**/*.ts",
+    "./src/index.ts",
+    "./src/pluginConfig.ts"
+  ]
+}
